@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutspot Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 300px;
+        }
+        .container h2 {
+            color: #007BFF;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group input {
+            width: 80%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        .form-group button {
+            width: 80%;
+            padding: 10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 7px;
+            cursor: pointer;
+        }
+        .form-group button:hover {
+            background-color: #0056b3;
+        }
+        .text-link {
+            color: #007BFF;
+            text-decoration: none;
+            display: block;
+            margin-top: 10px;
+        }
+        .text-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Login</h2>
+        <form id="loginForm" action="/login" method="POST">
+            <div class="form-group">
+                <input type="email" id="loginEmail" name="email" placeholder="Email Address" required>
+            </div>
+            <div class="form-group">
+                <input type="password" id="loginPassword" name="password" placeholder="Password" required>
+            </div>
+            <a style="text-align: right; margin-bottom: 10px;" class="text-link" onclick="showMessage()">Forgot Password?</a>
+            <div class="mt-5 form-group">
+                
+                <button type="submit">Login</button>
+            </div>
+            
+            <a href="/signup" class="text-link">I'm new here. Signup</a>
+        </form>
+    </div>
+
+    <script>
+        function showMessage() {
+            alert('DEAR USER, YOUR ACCOUNT PASSWORD ON TUTSPOT WAS SENT TO YOUR EMAIL. CHECK YOUR EMAIL FOR YOUR PASSWORD');
+        }
+    </script>
+
+</body>
+</html>

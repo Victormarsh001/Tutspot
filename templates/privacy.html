@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutspot</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .foot{
+            background-color: black;
+            text-align: center;
+            
+            
+            bottom: 0;
+            left: 0;
+            right: 0;
+            color: white;
+            margin-bottom: -25px;
+            
+            margin-top: 25px;
+            padding-top: 20px;
+        }
+        .foot a{
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            margin-left: 10px;
+            margin-top: 10px;
+        }
+        .foot a:hover{
+            color: #00ff00;
+        }
+        body {
+            margin-top: 52px;
+            margin-bottom: -10px;
+            background-color: #f8f9fa;
+            padding-top: 52px;
+        }
+        .navbar-brand {
+            font-weight: bold;
+        }
+        .course-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 19px;
+        }
+        .course-card {
+            text-decoration: none;
+            border: 2px solid blue;
+            border-radius: 8px;
+            padding: 50px 20px;
+            color: gray;
+            
+            background-color: #f8f9fa;
+            transition: transform 0.3s;
+        }
+        .course-card:hover {
+            transform: scale(1.05);
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <nav style="background-color: white; box-shadow: 2px 2px 3px 2px rgba(200, 200, 200, 0.3);" class="navbar navbar-expand-lg navbar-light fixed-top">
+        <a class="navbar-brand" href="#"><img src="/static/logo.jpeg" width="65" height="60" alt="Logo"></a>
+        {% if active_user %}
+        <h4 style="color: blue;"> {{ active_user}}</h4>
+        <p style="color: blue; font-size: 14px;"class="mt-2 lead"> Online</p>
+        
+        
+        {% else %}
+        <a style="background-color: blue; border-radius: 8px; border: 1px solid blue; text-decoration: none; color: white; padding: 6px 11px;" class="lead" href="#"> Login / Signup</a>
+        {% endif %}
+        
+        
+    
+    </nav>
+    
+    <div class="lead container">
+         <h2>Privacy Policy</h2>
+        <h5>Introduction</h5>
+        
+<p>Welcome to Tutspot! Your privacy is important to us. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website and use our services.</p>
+        
+
+<h3>Information We Collect</h3>
+
+<h5>Personal Information:</h5>
+    <p>Email: Used for account creation, communication, and authentication.</p>
+    <p>Username: Used to identify users on our platform.</p>
+    <p>Country: Collected to customize content and provide localized services.</p>
+    <p>Password: Created by users and used for account security.</p>
+
+<h3>Non-Personal Information</h3>
+    <p>IP Address: Collected to determine payment currency and for security purposes.</p>
+
+<h3>How We Use Your Information</h3>
+    <p><b>We use the information we collect in the following ways:</b></p>
+    <p>To Provide and Manage Services: To operate and maintain our website and services.<p>
+    <p>To Improve User Experience: To understand how our users interact with our site and improve our offerings.</p>
+    <p>To Communicate with You: To send updates, newsletters, and other information that may be of interest to you.</p>
+        <p>To Process Transactions: While Flutterwave handles the actual payment processing, we use your IP address to determine the appropriate currency for transactions.</p>
+        <p>To Ensure Security: To protect our users and services from fraud and abuse.</p>
+
+<h3>How We Share Your Information</h3>
+    <p><b>We may share your information with the following parties:</b></p>
+    <p>Service Providers: Third-party vendors who help us operate our website and services (e.g., hosting services).</p>
+    <p>Payment Processors: We use Flutterwave to handle payment processing, so your payment details are securely managed by them.</p>
+    <p>Legal Requirements: To comply with legal obligations or respond to lawful requests from public authorities.</p>
+    <p>Business Transfers: In the event of a merger, acquisition, or sale of assets, your information may be transferred to the new owner.</p>
+
+<h3>Data Security</h3>
+    <p>We implement appropriate technical and organizational measures to protect your personal data from unauthorized access, use, or disclosure. However, no internet transmission is completely secure, and we cannot guarantee absolute security.</p>
+
+<h3>Your Rights</h3>
+<p><b>Depending on your jurisdiction, you may have the following rights regarding your personal data:</b></p>
+    <p>Access: Request a copy of the data we hold about you.</p>
+    <p>Correction: Request correction of any inaccurate or incomplete data.</p>
+    <p>Deletion: Request deletion of your personal data, subject to certain conditions.</p>
+    <p>Restriction: Request restriction of processing your personal data.</p>
+    <p>Objection: Object to the processing of your personal data for certain purposes.</p>
+    <p>Data Portability: Request transfer of your data to another service provider.</p>
+
+<h3>Children's Privacy</h3>
+    <p>Our services are not intended for individuals under the age of 13. We do not knowingly collect personal information from children under 13. If we become aware that we have collected such information, we will take steps to delete it.</p>
+
+<h3>Changes to This Privacy Policy</h3>
+    <p>We may update this privacy policy from time to time. Any changes will be posted on this page, and we will notify you of significant changes via email or through our website.</p>
+        
+<h3>Contact Us</h3>
+<p>If you have any questions about this privacy policy or our data practices, please contact us at:</p>
+
+<p>Marsh</p> 
+<p>Email: tutspotofficial@gmail.com</p>  
+<p>Address: Cross River, Nigeria</p>
+        
+    </div>
+    <nav class="container foot">
+    <h2 style="color: white; font-weight: bold; font-family: Roboto;">Tutspot</h2>
+    <a href="/">Home</a>
+    <a href="/about">About</a>
+    <a href="/reviews">Review</a>
+    <a href="/contact">Contact Us</a>
+    <a href="/privacy">Privacy Policy</a>
+    <a href="/terms">Terms of Service</a>
+
+    <h3 class="lead mt-4"> Our Mission </h3>
+    <p style="font-size: 15px;" class="lead">Our mission is to provide a tutorial spot for learners and professionals from the vast fields of learning and ensure the cycle of "Learn • Create • Earn".</p>
+    
+    <p class="lead" style="font-size: 13px; color: white; text-align: center; padding: 9px;">Copyright © 2024 Tutspot. All rights reserved.Tutspot is a property of Marsh.</p>
+    
+    </nav>
+</body>
+
+</html>

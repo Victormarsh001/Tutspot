@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutspot Signup</title>
+    <style>
+        body {
+            font-family: Roboto;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 300px;
+        }
+        .container h2 {
+            color: #007BFF;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group input {
+            width: 80%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        .form-group button {
+            width: 80%;
+            padding: 10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 7px;
+            cursor: pointer;
+        }
+        .form-group small{
+            text-align: left;
+            font-weight: bold;
+            margin-top: 4px;
+        }
+        .form-group button:hover {
+            background-color: #0056b3;
+        }
+        .text-link {
+            color: #007BFF;
+            text-decoration: none;
+            display: block;
+            margin-top: 10px;
+        }
+        .text-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Signup</h2>
+        <form id="signupForm" action="/signupDetail" method="POST">
+            <div class="lead form-group">
+                <input class="lead" type="text" id="signupUsername" name="username" placeholder="Username" required><br/>
+            <small class="lead" id="small1" style="color: white;">Invalid Username </small>
+            </div>
+            
+            <div class="lead form-group">
+                <input type="text" id="signupCountry" name="country" placeholder="Country" required><br/>
+                <small class="lead" id="small2" style="color: white;">Invalid Country name</small>
+            </div>
+            <div class="lead form-group">
+                <input class="lead" type="email" id="signupEmail" name="email" placeholder="Email Address" required>
+                
+            </div>
+            
+            <div class="lead form-group">
+                <input type="password" id="signupPassword" name="password" placeholder="Set Password" required><br/>
+                <small class="lead" id="small3" style="color: white;">Password strength is too weak </small>
+            </div>
+            <div class="lead form-group">
+                <button class="lead" type="submit">Signup</button>
+            </div>
+            <a class="lead" href="/login" class="text-link">I'm not new here. Login</a>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('signupForm').addEventListener('submit', function (event) {
+            let valid = true;
+
+            const username = document.getElementById('signupUsername').value;
+            var small1 = document.getElementById('small1');
+            if (username.length < 3) {
+            small1.style.color = "red";
+                valid = false;
+            }
+
+            const password = document.getElementById('signupPassword').value;
+            var small2 = document.getElementById('small2'); 
+            if (password.length < 6) {
+small2.style.color = "red";  
+            valid = false;
+            }
+            const country = document.getElementById('signupCountry').value;
+            var small3 = document.getElementById('small3');
+            if(country.length < 3){
+                small3.style.color = "red";
+            valid = false;
+        }
+
+            if (!valid) {
+                event.preventDefault();
+            }
+        });
+    </script>
+
+</body>
+</html>

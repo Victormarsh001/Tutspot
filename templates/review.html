@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutspot</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        input{
+            border: 1px solid blue;
+            border-radius: 8px;
+            padding: 9px 10px;
+        }
+        .foot{
+            background-color: black;
+            text-align: center;
+            
+            
+            bottom: 0;
+            left: 0;
+            right: 0;
+            color: white;
+            
+            margin-top: 25px;
+            padding-top: 20px;
+            margin-bottom: -25px;
+        }
+        .foot a{
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            margin-left: 10px;
+            margin-top: 10px;
+        }
+        .foot a:hover{
+            color: #00ff00;
+        }
+        body {
+            background-color: #f8f9fa;
+            padding-top: 52px;
+            margin-top: 52px;
+        }
+        .navbar-brand {
+            font-weight: bold;
+        }
+        .course-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 19px;
+        }
+        .course-card {
+            text-decoration: none;
+            border: 2px solid blue;
+            border-radius: 8px;
+            padding: 50px 20px;
+            color: gray;
+            
+            background-color: #f8f9fa;
+            transition: transform 0.3s;
+        }
+        .course-card:hover {
+            transform: scale(1.05);
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <nav style="background-color: white; box-shadow: 2px 2px 3px 2px rgba(200, 200, 200, 0.3);" class="navbar navbar-expand-lg navbar-light fixed-top">
+        <a class="navbar-brand" href="#"><img src="/static/logo.jpeg" width="65" height="60" alt="Logo"></a>
+        {% if active_user %}
+        <h4 style="color: blue;"> {{ active_user}}</h4>
+        <p style="color: blue; font-size: 14px;"class="mt-2 lead"> Online</p>
+        
+        
+        {% else %}
+        <a style="background-color: blue; border-radius: 8px; border: 1px solid blue; text-decoration: none; color: white; padding: 6px 11px;" class="lead" href="#"> Login / Signup</a>
+        {% endif %}
+        
+        
+    
+    </nav>
+    
+    <div class="lead container">
+        <h2> Tutspot Reviews </h2>
+        <h5 style="margin-top: 20px;" class="mt-7">Write a Review</h5>
+        <p> Send all reviews about tutspot to <a href='mailto:tutspotreviews@gmail.com?subject=Tutspot%20Review&body=%3CWrite%20your%20reviews%20here%3E'></a></p>
+    </div>
+    <nav class="container foot">
+    <h2 style="color: white; font-weight: bold; font-family: Roboto;">Tutspot</h2>
+    <a href='/'>Home</a>
+    <a href="/about">About</a>
+    <a href="/reviews">Review</a>
+    <a href="/contact">Contact Us</a>
+    <a href="/privacy">Privacy Policy</a>
+    <a href="/terms">Terms of Service</a>
+
+    <h3 class="lead mt-4"> Our Mission </h3>
+    <p style="font-size: 15px;" class="lead">Our mission is to provide a tutorial spot for learners and professionals from the vast fields of learning and ensure the cycle of "Learn • Create • Earn".</p>
+    
+    <p class="lead" style="font-size: 13px; color: white; text-align: center; padding: 9px;">Copyright © 2024 Tutspot. All rights reserved.</p><br/><p>Tutspot is a property of Marsh.</p>
+    
+    </nav>
+</body>
+
+</html>
