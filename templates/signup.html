@@ -85,7 +85,7 @@
                 <input type="password" id="signupPassword" name="password" placeholder="Set Password" required><br/>
                 <small class="lead" id="small3" style="color: white;">Password strength is too weak </small>
             </div>
-            <div class="lead form-group">
+            <div class="mt-5 lead form-group">
                 <button class="lead" type="submit">Signup</button>
             </div>
             <a class="lead" href="/login" class="text-link">I'm not new here. Login</a>
@@ -104,15 +104,15 @@
             }
 
             const password = document.getElementById('signupPassword').value;
-            var small2 = document.getElementById('small2'); 
+            var small3 = document.getElementById('small3');
             if (password.length < 6) {
-small2.style.color = "red";  
+small3.style.color = "red";  
             valid = false;
             }
             const country = document.getElementById('signupCountry').value;
-            var small3 = document.getElementById('small3');
+            var small2 = document.getElementById('small2');
             if(country.length < 3){
-                small3.style.color = "red";
+                small2.style.color = "red";
             valid = false;
         }
 
