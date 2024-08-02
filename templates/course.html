@@ -1,0 +1,85 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutspot</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="icon" type="image/jpeg" href="/static/logo.jpeg">
+    <style>
+
+        body {
+            background-color: #f8f9fa;
+margin-top: 52px;
+margin-bottom: 30px;
+
+
+            padding-top: 52px;
+        }
+        .navbar-brand {
+            font-weight: bold;
+        }
+        .course-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 19px;
+        }
+        .course-card {
+            text-decoration: none;
+            border: 2px solid blue;
+            border-radius: 8px;
+            padding: 50px 20px;
+            color: gray;
+            
+            background-color: #f8f9fa;
+            transition: transform 0.3s;
+        }
+        .course-card:hover {
+            transform: scale(1.05);
+            text-decoration: none;
+        }
+        .form-group {
+            margin-bottom: 15px;
+            margin-top: 20px;
+            align-items: center;
+        }
+        .form-group button {
+            width: 80%;
+            padding: 10px;
+            background-color: #007BFF;
+            margin-left: 10%;
+            text-align: center;
+            align-items: center;
+            color: white;
+            border: none;
+            border-radius: 7px;
+            cursor: pointer;
+        }
+        .form-group button:hover {
+            background-color: #0056b3;
+        }
+
+    </style>
+  </head>
+  <body >
+    <nav style="background-color: white; box-shadow: 2px 2px 3px 2px rgba(200, 200, 200, 0.3);" class="navbar navbar-expand-lg navbar-light fixed-top">
+        <a class="navbar-brand" href="#"><img loading="lazy" src="/static/logo.jpeg" width="65" height="60" alt="Logo"></a>
+                   
+    </nav>
+    <div class="mt-7 container">
+      
+      <h5 style="font-weight: bold;" class="lead"> {{ frontend[session["pos"]]['title'] }} </h5>
+      <p style="font-size: 17px;" class="mt-2 lead"> {{ frontend[session["pos"]]['description'] }} </p>
+        {% for i in frontend[session["pos"]]['content'] %}
+        <p style="font-size: 13px;" class="lead"> {{ i }} </p>
+        {% endfor %}
+      
+      <form class="form-group" action='/course' method="POST">
+        <button type='submit'>Next</button>
+      </form>
+      
+      <p style="font-style: bold; text-align: center; font-size: 17px;" class="lead"> {{ progress }}/{{ length }}</p>
+    </div>
+  </body
+    </html>

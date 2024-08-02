@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Dashboard </title>
+    <style>
+      body {
+            background-color: #f8f9fa;
+            padding-top: 52px;
+        margin-top: 52px;
+        }
+        .navbar-brand {
+            font-weight: bold;
+        }
+      .contain{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .p{
+        font-size: 16px;
+      }
+    </style>
+  </head>
+  <body>
+    <nav style="background-color: white; box-shadow: 2px 2px 3px 2px rgba(200, 200, 200, 0.3);" class="navbar navbar-expand-lg navbar-light fixed-top">
+        <a class="navbar-brand" href="#"><img src="/static/logo.jpeg" width="65" height="60" alt="Logo"></a>
+    </nav>
+    
+    <div class="container">
+      <h3>Profile</h3>
+      <p class="p lead"> Username: {{ session["username"] }}</p>
+      <p class="p lead">Country: {{ session["country"] }}</p>
+      <p class="p lead">Email Address: {{ session["email"] }}</p>
+    </div>
+    <div class="mt-9 container">
+      <h3>Courses</h3>
+      {% if android %}
+
+      <div style="border: 2px solid blue; border-radius: 8px; padding: 14px 12px; box-shadow: 4px 4px 5px 4px rgba(200, 200, 200, 0.3);" class="contain lead">
+        <h6 style="margin-right: 15px;" class="lead">Android Development </h6>
+        <a style="font-size: 13px; text-decoration: none; font-weight: bold; border: 2px solid blue; background-color: blue; padding: 6px 10px; color: white; border-radius: 8px;" href="#">Open</a>
+      </div>
+      {% else %}
+      <div style="border: 2px solid blue; border-radius: 8px; padding: 14px 12px; box-shadow: 4px 4px 5px 4px rgba(200, 200, 200, 0.3);" class="contain lead">
+        <h6 style="margin-right: 15px;" class="lead">Android Development </h6>
+        <a style="font-size: 13px; text-decoration: none; font-weight: bold; border: 2px solid blue; background-color: blue; padding: 6px 10px; color: white; border-radius: 8px;" href="#">$20</a>
+      </div>
+      {% endif %}
+
+    <div class="mt-9 container">
+      <h3> Transactions </h3>
+      <p class="lead">Transactions here</p>
+    </div>
+  </body>
+</html>

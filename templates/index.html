@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tutspot</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="icon" type="image/jpeg" href="/static/logo.jpeg">
     <style>
         .foot{
             background-color: black;
@@ -60,10 +61,10 @@
 </head>
 <body>
     <nav style="background-color: white; box-shadow: 2px 2px 3px 2px rgba(200, 200, 200, 0.3);" class="navbar navbar-expand-lg navbar-light fixed-top">
-        <a class="navbar-brand" href="#"><img src="/static/logo.jpeg" width="65" height="60" alt="Logo"></a>
+        <a class="navbar-brand" href="#"><img src="/static/logo.jpeg" width="65" height="60" alt="Logo" loading="lazy"></a>
         {% if active_user %}
-        <a class="lead" style="color: blue; font-weight: bold;"> {{ active_user}}</a>
-        <p style="color: blue; font-size: 14px;"class="mt-2 lead"> Online</p>
+        <a href="/dashboard" class="lead" style="color: blue; font-weight: bold;"> {{ active_user}}</a>
+        <a style="background-color: blue; border-radius: 8px; border: 1px solid blue; text-decoration: none; color: white; padding: 6px 11px;" class="lead" href="/logout"> Logout</a>
         
         
         {% else %}
@@ -75,9 +76,9 @@
     </nav>
     
     <div class="container">
-        <p style="text-align: left; color: gray; margin-top: 45px;" class="lead">Learn skills with top-notch courses across diverse fields at the ultimate tutorial spot.</p>
+        <p style="text-align: left; color: gray; margin-top: 45px; font-size: 16px;" class="lead">Learn skills with top-notch courses across diverse fields at the ultimate tutorial spot.</p>
 
-        <p style="color: gray;" class="mt-8 lead"> Select a course and start learning</p>
+        <p style="font-size: 16px; color: gray;" class="mt-8 lead"> Select a course and start learning</p>
         
         
         
@@ -86,7 +87,7 @@
             {% for course in courses %}
             
             
-            <a class="lead course-card">
+            <a href="/intro?course_name={{ course.course }}&course_price={{ course.price }}" class="lead course-card">
             <p style="color: black; font-weight: bolder;">{{ course.course }}
                 
             <p style="font-weight: bolder;">{{ course.language }}</p>
