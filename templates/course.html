@@ -40,7 +40,7 @@ margin-bottom: 30px;
             text-decoration: none;
         }
         .form-group {
-            margin-bottom: 15px;
+            margin-bottom: 10px;
             margin-top: 20px;
             align-items: center;
         }
@@ -74,10 +74,19 @@ margin-bottom: 30px;
         {% for i in frontend[session["pos"]]['content'] %}
         <p style="font-size: 13px;" class="lead"> {{ i }} </p>
         {% endfor %}
-      
-      <form class="form-group" action='/course' method="POST">
+      <form class="mt-6 form-group" action='/course' method="POST">
         <button type='submit'>Next</button>
       </form>
+        
+      <form class="form-group" action='/courseRev' method="POST">
+        <button type='submit'>Back</button>
+      </form>
+        
+      <form class="form-group" action='/courseExit' method="POST">
+        <button type='submit'>Exit</button>
+      </form>
+        
+      
       
       <p style="font-style: bold; text-align: center; font-size: 17px;" class="lead"> {{ progress }}/{{ length }}</p>
     </div>

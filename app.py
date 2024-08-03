@@ -17,6 +17,8 @@ if not os.path.exists('tutspotData.db'):
 #Android Table  
    cursor.execute("CREATE Table Android(email TEXT)")
    cursor.execute("INSERT INTO Android(email) VALUES('androidTutspot@gmail.com')")
+#Reviews Table
+   cursor.execute("CREATE Table Reviews(name TEXT, review TEXT)")
    conn.commit()
    conn.close()
 
@@ -48,7 +50,9 @@ frontend =[
 {'title': 'Working with Images and Media in HTML', 'description': 'Understand how to integrate images, videos, and other media into your HTML pages.','content':['The `<video>`  and `<audio>` tags allows you to embed videos and audio content in HTML. They support multiple file formats and provides attributes for controlling playback.', 'Code Example:','<video controls>','    <source src="online_url_to_video_or_videoName.mp4" type="video/mp4">','</video>','<audio controls>','    <source src="url_to_audio.mp3" type="audio/mpeg">','</audio>','- `controls`: Adds video and audio controls like play, pause, and volume.','- `source`: Specifies the video/audio file and format.', 'Summary','Incorporating images effectively in your HTML documents enhances user experience and engagement. Understanding the various tags and techniques for handling images will help you create more dynamic and accessible web pages.']},
 
 {'title':'HTML Lists', 'description':'Structuring contents using Lists', 'content':['Lists are ideal for presenting items in a sequential or bullet format.','Unordered Lists','Unordered lists display items in a bullet-point format. The `<ul>` tag is used to create an unordered list, with each item enclosed in an `<li>` tag.', 'Code Example: ','<ul>','    <li>Item 1</li>','    <li>Item 2</li>','    <li>Item 3</li>','</ul>', 'Ordered Lists','Ordered lists display items in a numbered format. The `<ol>` tag is used, with each item enclosed in an `<li>` tag.','Code Example: ','<ol>','    <li>Step 1</li>','    <li>Step 2</li>','    <li>Step 3</li>','</ol>', 'Nested Lists','Lists can be nested inside each other to create multi-level lists. This is useful for representing hierarchical data.','Code Example: ','<ul>','    <li>Programming Languages','    <ul>','        <li>JavaScript</li>','       <li>Python</li>','        <li>Java</li>','    </ul>','        </li>','        <li>Web Development','    <ul>','        <li>HTML</li>','        <li>CSS</li>','        <li>JavaScript</li>','    </ul>','    </li>','</ul>','Summary','Lists are very important especially when organizing contents on a webpage. Go through the codes above, run them on your editor and study the outcome.']},
-{'title':'HTML Tables', 'description':'Structuring contents using Tables', 'content':['A Table is a  fundamental element in HTML that is used to structure and display data in rows and columns.The `<table>` tag is used to create a table. A basic table includes the `<tr>` (table row), `<th>` (table header), and `<td>` (table data) elements.', 'Code Example: ','<table>','    <tr>','        <th>Course</th>','        <th>Duration</th>','    </tr>','    <tr>','        <td>HTML Basics</td>','        <td>3 hours</td>','    </tr>','    <tr>','        <td>CSS Fundamentals</td>','        <td>4 hours</td>','    </tr>','</table>','Summary','Tables are used to structure data in rows and columns, take note of the tags(`tr`, `th`, `td`) within the `<table>` elements.','Now this is quite a milestone. why don`t you take a break and practice all we had discussed earlier and don`t forget to send us a review of your experience with Tutspot so far.']}
+{'title':'HTML Tables', 'description':'Structuring contents using Tables', 'content':['A Table is a  fundamental element in HTML that is used to structure and display data in rows and columns.The `<table>` tag is used to create a table. A basic table includes the `<tr>` (table row), `<th>` (table header), and `<td>` (table data) elements.', 'Code Example: ','<table>','    <tr>','        <th>Course</th>','        <th>Duration</th>','    </tr>','    <tr>','        <td>HTML Basics</td>','        <td>3 hours</td>','    </tr>','    <tr>','        <td>CSS Fundamentals</td>','        <td>4 hours</td>','    </tr>','</table>','Summary','Tables are used to structure data in rows and columns, take note of the tags(`tr`, `th`, `td`) within the `<table>` elements.','Now this is quite a milestone. why don`t you take a break and practice all we had discussed earlier and don`t forget to send us a review of your experience with Tutspot so far.']},{'title':'HTML Forms', 'description':'Handling Forms and User Inputs in HTML','content':['Forms collect user inputs and are created using the `<form>` tag, with various input types like `<input>`, `<textarea>`, and `<select>`.','Code Example: ','<form action="/submit" method="post">','    <label>Name:</label>','    <input placeholder="Write username here"type="text" id="name" name="name">','    <input type="submit" value="Submit">','</form>','The <form> tag in the code above contains two attributes(action and method) which are used when working on the backend of your web app. When you purchase and start learning our Backend Development Course, you\'ll see the action and method attributes in use but for now lets continue in the Frontend Course.','The <label> tag provides descriptions to the <input> telling the user the type of data to input.','The <input> tag provides the space for a user to input the data.It is a self-closing tag as you\'ve noticed, it does not need a closing tag like this `</input>`. It has many attributes(feel free to lookup)','Common attributes of the <input> tag: ','\'type\' : This attributes defines the type of data to input. Its values could be \'text\'(for mere texts), \'email\'(for email address), \'password\'(for paswords)\', \'integer/number\'(for numbers)\' or \'submit\' (this particular values changes the input space to a button as you see in the second <input> tag in the code above).','\'id\' : This attribute is used to set a specific identifier for a particular tag(we\'ll make use of it in the Backend Course). Its value could be anything you want to give to it','\'placeholder\' : This is used to give further description to an input.', 'Summary', 'I don\'t wanna be a spoiler but I want you to copy the code above and put it in your work and study each of the <input> tag attributes and understand their effects on your code output.There are many more attributes of the <input> tag out there, do yourself the favour to look them up and practice them. It is very important to practice and fully understand HTML forms before moving on to the next concept. Practicing is the only way to become a better programmer.']},
+
+{'title':'HTML Containers', 'description':'Working with divs', 'content':['HTML provides tags to enable the developer to organise contents in divisions on the webpage. For the this course, we\'ll only talk about the <div> tag. The <div> tag is used in organizing content of the webpage in divisions.','Code Example: ', '<div>','    <h3> The first div </h3>','    <p> This is the first div </p>', '</div>','<div>','    <h3> The second div </h3>','    <p> This is the second div </p>', '</div>', 'Best use of divs', 'Divs are used to organise contents on the web page.', 'Use divs to create a visually appealing webpage.','Summary','Divs organizes contents into partitions on the webpage. Do not forget to continue practicing.']}
 
 ]
 
@@ -90,6 +94,23 @@ def course():
          session["pos"] = 0
       
    return render_template('course.html',course=session["current_course"], frontend=frontend, length=len(frontend), progress=session["pos"]+1)
+
+@app.route('/courseRev', methods=["GET", "POST"])
+def courseRev():
+   if request.method == "POST":
+      if session["pos"] == 0:
+         session["pos"] = -1
+         return redirect(url_for('introPage'))
+      else:
+         session["pos"] -= 1
+   return redirect(url_for('course'))
+
+@app.route('/courseExit', methods= ["GET", "POST"])
+def courseExit():
+   if request.method == "POST":
+      session.pop("current_course")
+      session.pop("pos")
+   return redirect(url_for('index'))
     
 @app.route('/intro')
 def introPage():
@@ -130,7 +151,7 @@ def about():
    return render_template('about.html')
 
 @app.route('/reviews')
-def reviews():  
+def reviews():
    return render_template('review.html')
 
 @app.route('/contact')
@@ -139,7 +160,7 @@ def contact():
 @app.route('/privacy')
 def privacy():
    return render_template('privacy.html')
-@app.route('/login')
+@app.route('/login', methods=["GET", "POST"])
 def login():
    return render_template('login.html')
 
