@@ -69,9 +69,9 @@ margin-bottom: 30px;
     </nav>
     <div class="mt-7 container">
       
-      <h5 style="font-weight: bold;" class="lead"> {{ frontend[session["pos"]]['title'] }} </h5>
-      <p style="font-size: 17px;" class="mt-2 lead"> {{ frontend[session["pos"]]['description'] }} </p>
-        {% for i in frontend[session["pos"]]['content'] %}
+      <h5 style="font-weight: bold;" class="lead"> {{ content[session["pos"]]['title'] }} </h5>
+      <p style="font-size: 17px;" class="mt-2 lead"> {{ content[session["pos"]]['description'] }} </p>
+        {% for i in content[session["pos"]]['content'] %}
         <p style="font-size: 13px;" class="lead"> {{ i }} </p>
         {% endfor %}
       <form class="mt-6 form-group" action='/course' method="POST">

@@ -78,14 +78,14 @@ h4{
         <h4 style="color: blue;"> Course Outline</h4>
         {% for i in intros[name][0] %}
         <ul style="color: gray;" class="lead">
-            <li> {{ i }}</li>
+            <li style="font-size: 14px;"> {{ i }}</li>
         </ul>
         {% endfor %}
         
         <h4> Prerequisites</h4>
         {% for j in intros[name][1] %}
         <ul style="color: gray;" class="lead">
-           <li>{{ j }}</li>
+           <li style="font-size: 14px;">{{ j }}</li>
         </ul>
         {% endfor %}
         {% if 'username' in session %}

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Write a Comment</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav style="background-color: white; box-shadow: 2px 2px 3px 2px rgba(200, 200, 200, 0.3);" class="navbar navbar-expand-lg navbar-light fixed-top">
+        <a class="navbar-brand" href="#"><img src="/static/logo.jpeg" width="65" height="60" alt="Logo" loading="lazy"></a>
+
+    </nav>
+
+    <!-- Comment Form -->
+    <div style="margin-top: 105px;" class="container mt-9">
+        <h3>Add a Comment</h3>
+        <form id="commentForm">
+            <div class="form-group">
+                <textarea id="commentContent" class="form-control" rows="10" placeholder="Write your comment here..." maxlength="500"></textarea>
+                <small id="commentError" class="form-text text-muted"></small>
+            </div>
+            <button style="width: 90%; margin-left: 5%;" type="submit" class="btn btn-primary">Add Comment</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('commentForm').addEventListener('submit', function(event) {
+            const commentContent = document.getElementById('commentContent').value.trim();
+            const commentError = document.getElementById('commentError');
+
+            if (commentContent === '') {
+                commentError.textContent = 'Comment cannot be empty.';
+                commentError.style.color = 'red';
+                event.preventDefault();
+            } else {
+                commentError.textContent = '';
+            }
+        });
+    </script>
+</body>
+</html>

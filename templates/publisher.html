@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create a Post</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav style="background-color: white; box-shadow: 2px 2px 3px 2px rgba(200, 200, 200, 0.3);" class="navbar navbar-expand-lg navbar-light fixed-top">
+        <a class="navbar-brand" href="#"><img src="/static/logo.jpeg" width="65" height="60" alt="Logo" loading="lazy"></a>
+          
+    </nav>
+
+    <!-- Post Form -->
+    <div style="margin-top: 105px;" class="container">
+        <h3>Create a Post</h3>
+        <form id="postForm">
+            <div class="form-group lead">
+                <textarea style="border-radius: 8px; border: 2px solid blue; font-size: 14px;" id="postContent" class="form-control lead" rows="14" placeholder="Write your post here..." maxlength="1000"></textarea>
+                <small  style="color: white;" id="postError" class="form-text text-muted"></small>
+            </div>
+            <button style="width: 90%; margin-left: 5%;" type="submit" class="btn btn-primary mb-9">Publish</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('postForm').addEventListener('submit', function(event) {
+            const postContent = document.getElementById('postContent').value.trim();
+            const postError = document.getElementById('postError');
+
+            if (postContent === '') {
+                postError.textContent = 'Post cannot be empty.';
+                postError.style.color = "red";
+                event.preventDefault();
+            } else if (postContent.split(' ').length > 1000) {
+                postError.textContent = 'Post cannot exceed 1000 words.';
+                postError.style.color = "red";
+                event.preventDefault();
+            } else {
+                postError.textContent = '';
+            }
+        });
+    </script>
+</body>
+</html>

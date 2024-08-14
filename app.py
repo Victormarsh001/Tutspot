@@ -22,11 +22,110 @@ if not os.path.exists('tutspotData.db'):
    conn.commit()
    conn.close()
 
-intro = {'Frontend Web Development': [['Introduction to HTML', 'HTML Basic Structure', 'HTML Headings', 'HTML Paragraphs', 'HTML Links', 'Images/Videos in HTML', 'HTML Lists', 'HTML Tables','HTML Forms','Semantic HTML'], 
-                              ['HTML Code Editor','You must signup or login to access this free course', 'Any prior knowledge on programming will be an icing on the cake']
-], 'Machine Learning':[['Introduction to Machine Learning', 'Linear Regression', 'Logistic Regression', 'Decision Trees', 'Random Forest', 'Neural Networks', 'K-Nearest Neighbors', 'Support Vector Machines', 'Clustering', 'Dimensionality Reduction', 'ML Practice'], 
-                              ['Python IDE or Code Editor','You must login and pay a token to access this course', 'Any prior knowledge on Basic Mathematics, Statistics and Python Programming Language is relevant']
-], 'SQL Database': [[ 'Introduction to SQL', 'SQL Basics', 'SQL Queries', 'SQL Joins', 'SQL Aggregates', 'SQL Functions', 'SQL Practice'], ['Python IDE or Code Editor', 'You must login and pay a token to access this course', 'Any prior knowledge on Python Programming Language will be relevant']], 'Data Science': [[ 'Introduction to Data Science', 'Data Visualization', 'Data Analysis', 'Data Preprocessing', 'Data Cleaning', 'Data Modeling', 'Data Wrangling'], ['Python IDE or Code Editor', 'You must login and pay a token to access this course', 'Any prior knowledge on SQL Database and Python Programming Language will be relevant']]}
+intro = {'Frontend Web Development': [ ['Introduction to HTML', 'HTML Basic Structure', 'HTML Headings', 'HTML Paragraphs', 'HTML Links', 'Images/Videos in HTML', 'HTML Lists', 'HTML Tables','HTML Forms','HTML Containers','Recap','Practice'], 
+                              ['HTML Code Editor','You must signup or login to access this free course', 'Any prior knowledge on programming will be an advantage']
+],
+'Python Programming Language':[['Introduction to Machine Learning', 'Linear Regression', 'Logistic Regression', 'Decision Trees', 'Random Forest', 'Neural Networks', 'K-Nearest Neighbors', 'Support Vector Machines', 'Clustering', 'Dimensionality Reduction', 'ML Practice'], 
+                              ['Python IDE or Code Editor','You have to login and make payments to access this course', 'Any prior knowledge on other Programming Language is an advantage']
+], 'SQL Database': [[ 'Introduction to SQL', 'SQL Basics', 'SQL Queries', 'SQL Joins', 'SQL Aggregates', 'SQL Functions', 'SQL Practice'], ['Python IDE or Code Editor', 'You must login and pay a token to access this course', 'Any prior knowledge on Python Programming Language will be relevant']], 'Backend Development': [[ 'Introduction to Data Science', 'Data Visualization', 'Data Analysis', 'Data Preprocessing', 'Data Cleaning', 'Data Modeling', 'Data Wrangling'], ['Python IDE or Code Editor', 'You must login and pay a token to access this course', 'Any prior knowledge on SQL Database and Python Programming Language will be relevant']],
+'Swift':[[ 'Introduction to Swift', 'Swift Basics', 'Swift Control Flow', 'Swift Collections', 'Swift Functions', 'Swift Practice'], ['Swift IDE or Code Editor', 'You have to  login and make payment to access this course', 'Prior knowledge of any Object-Oriented Programming Language will be an advantage']], 'Dart':[[ 'Introduction to Dart', 'Dart Basics', 'Dart Control Flow', 'Dart Collections', 'Dart Functions', 'Dart Practice'],[ 'Dart IDE or Code Editor', 'You have to login and make payment to access this course', 'Prior knowledge of any Object-Oriented Programming Language will be an advantage']], 'UI/UX Design Principles':[[ 'Introduction to UI/UX Design', 'UI/UX Design Principles', 'UI/UX Design Tools', 'UI/UX Design Practice'], ['UI/UX Design IDE or Code Editor', 'You have to login and make payment to access this course', 'Prior knowledge of any Object-Oriented Programming Language will be an advantage']], 'Kotlin':[[ 'Introduction to Kotlin', 'Kotlin Basics', 'Kotlin Control Flow', 'Kotlin Collections', 'Kotlin Functions', 'Kotlin Practice'],[ 'Kotlin IDE or Code Editor', 'You have to login and make payment to access this course', 'Prior knowledge of any Object-Oriented Programming Language will be an advantage']], 'Java':[[ 'Introduction to Java', 'Java Basics', 'Java Control Flow', 'Java Collections', 'Java Functions', 'Java Practice'], [ 'Java IDE or Code Editor', 'You have to login and make payment to access this course', 'Prior knowledge of any Object-Oriented Programming Language will be an advantage']], 'Mongo Database':[['Introduction to MongoDB', 'MongoDB Basics', 'MongoDB Queries', 'MongoDB Aggregates'],[ 'MongoDB IDE or Code Editor', 'You have to login and make payment to access this course', 'Prior knowledge of any Object-Oriented Programming Language will be an advantage']], 'Digital Marketing':[[ 'Introduction to Digital Marketing', 'Digital Marketing Basics', 'Digital Marketing Tools', 'Digital Marketing Practice'],[ 'Digital Marketing IDE or Code Editor', 'You have to login and make payment to access this course', 'Prior knowledge of any Object-Oriented Programming Language will be an advantage']]
+}
+python = [
+{'title':'Introduction to Python', 'description':'Brief overview of Python', 'content':['Python is a fun and easy programming language developed by Guido Van Rossum in the year 1990. It is widely used in the development of AIs and Backend.','Python is very versatile in the sense that it can be used for AI/ML Development, Backend Web Development(check out the Backend course), Automation, App/Game Development, etc.','For this course, you\'ll need a Python code editor or an IDE(softwares for writing python codes).','We suggest you download the Pycharm IDE on your computer or download the Pydroid3 app on Playstore for the Android users, install, setup and create a file that has a \'.py\' extension and start writing Python codes.']},{'title':'Python Basics', 'description':'Outputs and Comments', 'content':['Here, we will start seeing some codes in action so grab a pen, grab a notebook fasten your seat belts and lets begin.','Output in Python', 'In Python, output refers to displaying information to the user. The most common way to output data in Python by using the `print()` function. ','The `print()` function can take various data types such as strings, numbers, and more.','Code Examples :', 'print("Hello, World!")','print(42)', 'print(3.14)','Copy the code above, paste it on your IDE or code editor and you will see the following outputs: ','Hello, World!','42','3.14', 'The first output is a String because it is enclosed in quotaion marks. You may be asking, why didn\'t I put the numeric values too in a quotation mark. That is because, python knows numbers so if you put numbers in quotaion marks, python will automatically treat them as strings.','You can also use the `print()` function to output multiple items separated by a comma.','Code Example:','print("The answer is", 42)','The Output is: The answer is 42','Comments','Comments are used to describe a line or block of codes. It is denoted by a \'#\' sign.','Code Example: ','print("Hello World")','#prints Hello','When you run the code above, you realize that the comment which is the line of code gets ignored by the interpreter and is not executed. The purpose of comments is to describe codes for easy understanding of other developers and yourself in the future. Its a good practice to always use comments in your codes.',
+            'Summary','It is very important to understand outputs in python because the main reason for writing codes is to see a desired output when the code is executed. In programming the best way to become better is to practice so go ahead and practice what you\'ve learnt in this lesson before going to the next.']},{'title':'Basic Syntax','description':'Variables', 'content':['A variable in Python is a way to store information that you want to reuse or manipulate later. It is a named location in memory for storing data',
+           'Think of a variable as a labeled box where you can store your data.Just like you might have a box labeled "Toys" to store toys, you can have a variable labeled `message` to store a string.',
+            'Code Example:',
+           
+            'message = "Hello, Python!" ',
+            'number = 10',
+            'pi = 3.14159',
+            'print(message)',
+            'print(number)',
+            'print(pi)',
+            
+            'The Outputs are:','Hello, Python!','10','3.14159',
+            'To declare a variable, you need a variable name, an equal sign and a value to the variable, as simple as that.',
+            'Variables can store different types of data such as integers, floats, strings, and more. ',
+            'Here are a few code examples:',
+            'Integer variable',
+            'age = 25',
+            'Float variable',
+            'height = 5.9',
+            'String variable',
+            'name = "Alice"',
+        
+            'Boolean variable',
+            'is_student = True',
+         
+            'Summary',
+            'In this lesson, you learned how to create variables to store data. We will talk about the different datatypes in the next page. Be sure to practice and don\'t forget all you need to declare a variable is a name, an equal sign and a value.',
+           'We covered the basics of outputting strings, numbers, and multiple items, as well as how to create and use variables of different data types. Understanding these fundamentals is crucial as you move forward with learning Python. Keep practicing, and you\'ll become more comfortable with these concepts in no time!']},
+
+{'title':'Basic Syntax', 'description':'Data types in Python', 'content':['Data types in Python specify what kind of value a variable holds. Understanding data types is crucial because it helps you know what operations can be performed on a particular piece of data. Examples of Data Types in Python are: ',
+            'Integers: Whole numbers, positive or negative, without decimals.',
+            'Code Example',
+            'age = 25',
+            'year = 2023',
+      
+            'Floats: Numbers with decimals.',
+            'Code Examples: ',
+            'height = 5.9',
+            'price = 19.99',
+          
+            'Strings: Sequences of characters, enclosed in single or double quotes.'
+            'Code Examples: ',
+            'name = "Alice"',
+            'message = \'Hello, World!\'',
+            
+            'Booleans : They can only have two values \'True\' and \'False\' which do not need to enclosed in quotation marks because python also recognizes them too. If you don\'t understand them, just keep going it will all make sense later.',
+            'Code Examples: ',
+            'is_student = True',
+            'has_license = False',
+            'Summary','If things do not add up for you, just keep going forward, you will understand better once you see them in some code action.']},
+           
+{'title':'Basic Syntax', 'description':'Operators in Python', 'content':['Operators in Python are used to perform operations on variables and values. They are categorized based on the operations they perform.'
+            '1. Arithmetic Operators: Used to perform basic arithmetic operations like addition, subtraction, multiplication, etc.',
+            'Code Examples: ',
+            
+            'sum = 10 + 5  # sum is 15',
+            'difference = 10 - 5  # difference is 5',
+            'product = 10 * 5  # product is 50',
+            'quotient = 10 / 5  # quotient is 2.0',
+            'floor_div = 10 // 3  # floor_div is 3',
+            'remainder = 10 % 3  # remainder is 1',
+            'power = 2 ** 3  # power is 8','All other operators are quite familiar except the Modulo(%) and the Floor Div(//) operators. The Modulo operator is used to return the remainder of a division operation i.e 10%5 will be 0 because they will be no remainder and 7%6 will be 1 because the remainder after dividing 7 by 6 will be 1.','The Floor Div(//) Operator can be seen as the opposite of the modulo operator which returns the number of times a number divides another, not minding the remainder i.e 10//3 will be 3 because thats the number of times 3 can divide 10 and we don\'t mind the remainder. So you can simply say its just normal division but not minding any remainders.','If it doesn\'t make sense, read again and try to understand things because they\'re quite technical.',
+            
+            '2. Comparison Operators: They are used to compare two values and they return Boolean values. They make use of greater than(>), less than(<), greater than or equal to(>=), less than or equal to(<=), equal-equal to(==) and not equal to(!=).',
+            'Code Examples: ',
+            'x = 10',
+            'y = 5',
+            'print(x == y)  #Compares if the two values are exactly equal. False',
+            'print(x != y)  # Checks if the two values are not equal. True',
+            'print(x > y)  # Checks if x is greater than y. True',
+            'print(x < y)  # Checks is x is less than y. False',
+            'print(x >= y)  # Checks is x greater or equal to y. True beacuse x is greater',
+            'print(x <= y)  # Checks if x is less than or equal to y. False',
+      
+            '3. Logical Operators: Used to combine conditional statements.You will see its use later in the course.',
+            'Code Examples: ',
+            'a = True',
+            'b = False',
+            'print(a and b)  # False',
+            'print(a or b)  # True',
+            'print(not a)  # False',
+            'Summary'
+            'In this lesson, you learned about different operators, including arithmetic, comparison, and logical operators. ',
+            'These fundamental building blocks will allow you to perform a wide range of operations in your Python programs. Keep practicing, and you\'ll get comfortable with using these operators!']},
+{'title':'Basic Syntax','description':'Control Flow: If Statements', 'content':['Control flow statements in Python allows you to execute different blocks of code based on certain conditions. This is essential for making decisions in your programs.','If Statements','The `if` statement allows you to execute blocks of code only if a specified condition is true. Here\'s a basic example:','age = 18','if age >= 18:','    print("You are an adult.")','In this example, the message "You are an adult." will be printed only if the variable `age` is greater than or equal to 18. Also observe the indentation given in the print() function, it is very important to show that if a condition is met, the block of code beneath it will be executed. The indentation could be 2 to 4 blank spaces.',  'Else Statements','The `else` statement can be used to execute a block of code if the condition in the `if` statement is false. Here\'s how it works:','age = 16','if age >= 18:','    print("You are an adult.")','else:','    print("You are not an adult.")',
+            'In this case, the message "You are not an adult." will be printed because the variable `age` is less than 18 and so the `else` block will be executed.',
+            'Elif Statements',
+            'The `elif` statement stands for "else if" and can be used to check multiple conditions. If the first condition is false, the `elif` statement checks the next condition, and so on:','age = 17','if age >= 18:','    print("You are an adult.")','elif age >= 13:','    print("You are a teenager.")','else:','    print("You are a child.")',  'In this example, the message "You are a teenager." will be printed because the variable `age` is greater than or equal to 13 but less than 18. Observe the inde tations.',
+            'Summary',
+            'In this lesson, you learned about control flow in Python using `if`, `else`, and `elif` statements. These statements allow you to make decisions in your code based on conditions. ',
+            'By using `if` statements, you can execute code only when certain conditions are met. The `else` statement provides an alternative block of code when the `if` condition is not met, and `elif` statements allow for multiple conditions to be checked sequentially.',
+            'These control flow tools are fundamental for creating dynamic and responsive programs. Keep practicing, and you\'ll become proficient in using them in no time!']}                  
+
+]
 
 frontend =[
 {'title':'Introduction to HTML', 'description':'Brief overview of HTML', 'content':['HTML is short for Hyper Text Markup Language. It is the standard language for building and structuring web pages.', 'HTML was developed by Mr. Tim Berners Lee who was obsessed with building a media through which scientists from colleges and universities could access and share documents, and that obsession led to the development of the World Wide Web(WWW), Hyper Text Transfer Protocol(the rules that guides the transfer of data on the WWW) and HTML(the language of the web) in 1990 by him.', 'This course is the Frontend Web Developer course that will teach you how to build the frontend of a web site or web app using HTML and CSS. Frontend is the part of the web site or app that interacts with the users.','You may be asking, why would anyone need to learn HTML especially in the world of today where AIs have made everything easier. Yes AIs have automated everything but when using AIs to build your own website, you WILL surely need to make customized changes to the codes that the AI will generate for you and if you know nothing about HTML or programming as a whole, you will not know where or what to change or edit. That\'s the fact.', 'For this course, you\'ll need to download a HTML code editor(a software for writing codes).', 'For the PC users, I strongly recommend VS Code so go ahead and download VS Code and create a file that has the extension \'.html\'. Once that is done, open the file and thats where we\'ll be writing our HTML codes', 'For the Android/iOS users, simply head to the Google Playstore or the App Store, search and download HTML code editor', 'Summary', 'Once you\'ve setup the code the code editor, grab a pen, a notebook and get ready to become the latest Frontend Web Developer.']},
@@ -58,21 +157,14 @@ frontend =[
 
 
 
-courses = [{'course':"Frontend Web Development", 'language': "HTML • CSS • JS", 'price':5},
-           {'course':"Machine Learning", 'language': "Python • Numpy • Pandas", 'price':12},
-           {'course':"SQL Database", 'language': "Python • SQL", 'price':4},
-           {'course':"Data Science", 'language': "Python", 'price':15},
-           {'course':"Backend Development", 'language': "Python • Flask • SQL", 'price':10},
-        {'course':"Blockchain Development", 'price':20},
-           
-        {'course':"Android Development", 'language': "Java • Kotlin • Android Studio", 'price':20},
-           {'course':"iOS Development", 'language': "Swift • X-Code • iOS", 'price':20},
-          {'course':"Cross-platform Development", 'language': "Dart • Flutter", 'price':15},
-           
-           {'course':"UI/UX Design", 'price':8}
-]
-
+courses = [{'course':"Frontend Web Development", 'language': "HTML • CSS • Bootstrap", 'price':0, "content":frontend},
+           {'course':"Python Programming Language", 'language': "Python", 'price':5, "content":python},          {'course':"Backend Development", 'language': "Python • Flask • SQL", 'price':10,"content":python}, {'course':"SQL Database", 'language': "Python • SQL", 'price':2,"content":python}, {'course':"Mongo Database", 'language': "Mongo • Python", 'price':5,"content":python}, {'course':"Digital Marketing ", 'price':5,"content":python},  {'course':"Java Programming Language", 'language': "Java", 'price':5,"content":python}, {'course':'Kotlin Programming Language', 'language': "Kotlin", 'price':5,"content":python}, {'course':"Dart Programming Language", 'language': 'Dart', 'price':5,"content":python}, {'course':'Swift Programming Language', 'language':'Swift', 'price':5,"content":python},         {'course':"UI/UX Design Principles", 'price':2,"content":python}]
 @app.route('/')
+def discussion():
+   discussions = ["Discussion 1", "Discussion 2", "Discussion 3. Thejskfkandjfn, kejfmsjskskfk osotjskeitkwk", "Discussion 4", "Discussion 5"]
+   return render_template('comment.html', discussions=discussions)
+
+@app.route('/index')
 def index():
    if "username" in session:
       active_user = session["username"]
@@ -80,20 +172,21 @@ def index():
       active_user = False
    return render_template('index.html', courses=courses, active_user=active_user)
 
+
 @app.route('/course', methods=["GET", "POST"])
 def course():
    
-   global frontend
+   
    if "pos" not in session:
       session["pos"] = -1
 
    if request.method == "POST":
-      if session["pos"] < len(frontend)-1:
+      if session["pos"] < len(session["content"])-1:
          session["pos"] += 1
       else:
          session["pos"] = 0
       
-   return render_template('course.html',course=session["current_course"], frontend=frontend, length=len(frontend), progress=session["pos"]+1)
+   return render_template('course.html',course=session["current_course"], content=session["content"], length=len(session["content"]), progress=session["pos"]+1)
 
 @app.route('/courseRev', methods=["GET", "POST"])
 def courseRev():
@@ -117,9 +210,11 @@ def introPage():
    global intro
    course = request.args.get("course_name")
    price = request.args.get("course_price")
+   content = request.args.get("course_content")
    if course and price:
       session["current_course"] = deepcopy(course)
       session["current_price"] = deepcopy(price)
+      session["content"] = deepcopy(content)
    else:
       return redirect(url_for("index"))
    name = session["current_course"]
