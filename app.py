@@ -159,12 +159,9 @@ frontend =[
 
 courses = [{'course':"Frontend Web Development", 'language': "HTML • CSS • Bootstrap", 'price':0, "content":frontend},
            {'course':"Python Programming Language", 'language': "Python", 'price':5, "content":python},          {'course':"Backend Development", 'language': "Python • Flask • SQL", 'price':10,"content":python}, {'course':"SQL Database", 'language': "Python • SQL", 'price':2,"content":python}, {'course':"Mongo Database", 'language': "Mongo • Python", 'price':5,"content":python}, {'course':"Digital Marketing ", 'price':5,"content":python},  {'course':"Java Programming Language", 'language': "Java", 'price':5,"content":python}, {'course':'Kotlin Programming Language', 'language': "Kotlin", 'price':5,"content":python}, {'course':"Dart Programming Language", 'language': 'Dart', 'price':5,"content":python}, {'course':'Swift Programming Language', 'language':'Swift', 'price':5,"content":python},         {'course':"UI/UX Design Principles", 'price':2,"content":python}]
-@app.route('/')
-def discussion():
-   discussions = ["Discussion 1", "Discussion 2", "Discussion 3. Thejskfkandjfn, kejfmsjskskfk osotjskeitkwk", "Discussion 4", "Discussion 5"]
-   return render_template('comment.html', discussions=discussions)
 
-@app.route('/index')
+
+@app.route('/')
 def index():
    if "username" in session:
       active_user = session["username"]
@@ -172,7 +169,22 @@ def index():
       active_user = False
    return render_template('index.html', courses=courses, active_user=active_user)
 
+@app.route('/discussion')
+def discussion():
+   discussions = ["Discussion 1", "Discussion 2", "Discussion 3. Thejskfkandjfn, kejfmsjskskfk osotjskeitkwk", "Discussion 4", "Discussion 5"]
+   return render_template('discussion.html', discussions=discussions)
 
+
+@app.route('/comment', methods=["GET", "POST"])
+def comment():
+   return render_template('comment.html')
+
+
+@app.route('/publisher', methods=["GET", "POST"])
+def publisher():
+  # post = request.form["post"]
+
+   return render_template('publisher.html')
 @app.route('/course', methods=["GET", "POST"])
 def course():
    
