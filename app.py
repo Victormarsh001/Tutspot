@@ -1,26 +1,49 @@
 from copy import deepcopy
 import sqlite3
-import os
-import secrets
+from os import environ, path
+from secrets import token_urlsafe
+from datetime import datetime
 from flask import Flask, render_template, request, redirect, url_for, session
 
 app = Flask(__name__)
-app.secret_key = os.environ.get("SECRET_KEY")
+app.secret_key = environ.get("SECRET_KEY")
 if not app.secret_key:
-    app.secret_key = secrets.token_urlsafe(32)
+    app.secret_key = token_urlsafe(32)
 
-if not os.path.exists('tutspotData.db'):
-   conn = sqlite3.connect('tutspotData.db')
+if not path.exists('data.db'):
+   conn = sqlite3.connect('data.db')
    cursor = conn.cursor()
    cursor.execute("Create Table Data(name TEXT, country TEXT, email TEXT, password TEXT)")
    cursor.execute("Insert into Data Values('Heung', 'China', 'seongheungshim@gmail.com', 'heung4k')")
 #Android Table  
    cursor.execute("CREATE Table Android(email TEXT)")
    cursor.execute("INSERT INTO Android(email) VALUES('androidTutspot@gmail.com')")
-#Reviews Table
-   cursor.execute("CREATE Table Reviews(name TEXT, review TEXT)")
+   
+#Comments Table
+   cursor.execute("CREATE Table Comments(id Integer, name TEXT, comment TEXT, date TEXT)")
    conn.commit()
    conn.close()
+
+if not path.exists('post.db'):
+   conn = sqlite3.connect('post.db')
+   cursor = conn.cursor()
+   cursor.execute("CREATE Table Post(id Integer, name TEXT, post TEXT, date TEXT)")
+   conn.commit()
+   conn.close()
+if not path.exists('jobs.db'):
+   conn = sqlite3.connect('jobs.db')
+   cursor = conn.cursor()
+   cursor.execute("Create Table Job(id Integer, name Text, role Text, description Text, date Text)")
+   conn.commit()
+   conn.close()
+if not path.exists('review.db'):
+   conn = sqlite3.connect('review.db')
+   cursor = conn.cursor()
+   cursor.execute("CREATE Table Rating(name TEXT, rate TEXT, date TEXT)")
+   cursor.execute("Insert Into Rating VALUES('Louis', 'Great and Simple UI!', '19/08/2024')")
+   conn.commit()
+   conn.close()
+   
 
 intro = {'Frontend Web Development': [ ['Introduction to HTML', 'HTML Basic Structure', 'HTML Headings', 'HTML Paragraphs', 'HTML Links', 'Images/Videos in HTML', 'HTML Lists', 'HTML Tables','HTML Forms','HTML Containers','Recap','Practice'], 
                               ['HTML Code Editor','You must signup or login to access this free course', 'Any prior knowledge on programming will be an advantage']
@@ -169,22 +192,110 @@ def index():
       active_user = False
    return render_template('index.html', courses=courses, active_user=active_user)
 
+
+@app.route('/jobView')
+def jobView():
+   jobs = []
+   conn = sqlite3.connect('jobs.db')
+   cursor = conn.cursor()
+   cursor.execute("Select * from Job")
+   jobs = cursor.fetchall()
+   conn.close()
+   return render_template('jobView.html', jobs=jobs)
+   
+@app.route('/job')
+def job():
+   data = []
+   Id = request.args.get("id")
+   
+   if Id:
+      session['jobId'] = Id
+   else:
+      return redirect(url_for("jobView"))
+   conn = sqlite3.connect('jobs.db')
+   cursor = conn.cursor()
+   cursor.execute("Select * From Job Where id = :id", {'id':session["jobId"]})
+   data = cursor.fetchall()
+   conn.close()
+   return render_template("job.html", jobs=data)
+
 @app.route('/discussion')
 def discussion():
-   discussions = ["Discussion 1", "Discussion 2", "Discussion 3. Thejskfkandjfn, kejfmsjskskfk osotjskeitkwk", "Discussion 4", "Discussion 5"]
+   conn = sqlite3.connect('post.db')
+   cursor = conn.cursor()
+   cursor.execute("Select * from Post")
+   discussions = cursor.fetchall()
+   conn.close()
    return render_template('discussion.html', discussions=discussions)
 
+@app.route('/commentView')
+def commentView():
+   Id = request.args.get("id")
+   Author = request.args.get('author')
+   if Id or Author:
+      session['discussionId'] = Id
+      session['discussionAuthor'] = Author
+   else:
+      return redirect(url_for("discussion"))
+      
+   
+
+   id = session['discussionId']
+   author = session['discussionAuthor']
+   comments = []
+   conn = sqlite3.connect('data.db')
+   cursor = conn.cursor()
+   cursor.execute("select * from Comments Where id = :id", {'id':id})
+   comments = cursor.fetchall()
+   conn.close()
+   return render_template( 'commentView.html', author=author, comments=comments)
 
 @app.route('/comment', methods=["GET", "POST"])
 def comment():
+   
+   if not session['discussionId'] or not session['discussionAuthor']:
+      return redirect(url_for('discussion'))
+
+   if request.method == 'POST':
+      
+      time = datetime.now()
+      id = session['discussionId']
+      name = session['username']
+      date = time.strftime("%d/%m/%Y")
+      comment = request.form["comments"]
+      conn = sqlite3.connect('data.db')
+      cursor = conn.cursor()
+      cursor.execute("Insert into Comments(id, name, comment, date) VALUES (:id, :name, :comment,:date)", {'id':id, 'name':name, 'comment':comment,'date':date})
+      conn.commit()
+      conn.close()
+      return redirect(url_for('commentView'))
+
+
+      
+      
    return render_template('comment.html')
 
 
 @app.route('/publisher', methods=["GET", "POST"])
 def publisher():
-  # post = request.form["post"]
+   if request.method == "POST":
+      time = datetime.now()
+      name = session["username"]
+      pub = request.form["pub"]
+      date = time.strftime("%d/%m/%Y")
+      conn = sqlite3.connect('post.db')
+      cursor = conn.cursor()
+      cursor.execute("Select * from Post")
+      size = len(cursor.fetchall()) + 1
+      cursor.execute("INSERT INTO Post(id, name, post, date) VALUES (:id, :name, :post, :date)", {'id':size, 'name':name, 'post':pub, 'date':date})
+      conn.commit()
+      conn.close()
+      print("Added to Post table")
+      return render_template('discussion.html')
+   
 
    return render_template('publisher.html')
+
 @app.route('/course', methods=["GET", "POST"])
 def course():
    
@@ -240,7 +351,7 @@ def introPage():
 @app.route('/dashboard')
 def dashboard():
    value = session["email"]
-   conn = sqlite3.connect('tutspotData.db')
+   conn = sqlite3.connect('data.db')
    cursor = conn.cursor()
    cursor.execute("Select * from Android Where email = :value", {'value':value})
    result = cursor.fetchone()
@@ -257,9 +368,30 @@ def dashboard():
 def about():
    return render_template('about.html')
 
-@app.route('/reviews')
+@app.route('/reviews', methods=["GET", "POST"])
 def reviews():
-   return render_template('review.html')
+   data = []
+   conn = sqlite3.connect('review.db')
+   cursor = conn.cursor()
+   cursor.execute("Select * From Rating")
+   data = cursor.fetchall()
+   conn.close()
+   
+   if request.method == "POST":
+      name = request.form["name"]
+
+      review = request.form["review"]
+      now = datetime.now()
+      date = now.strftime("%d / %m / %Y")
+      
+      conn = sqlite3.connect('review.db')
+      cursor = conn.cursor()
+      cursor.execute("INSERT INTO Rating(name, rate, date) VALUES(:name, :rate, :date)", {'name':name, 'rate':review, 'date':date})    
+      conn.commit() 
+      conn.close()
+
+      
+   return render_template('review.html', data=data)
 
 @app.route('/contact')
 def contact():
@@ -287,7 +419,7 @@ def signupDetail():
       country = request.form['country']
       email = request.form['email']
       password = request.form['password']
-      conn = sqlite3.connect('tutspotData.db')
+      conn = sqlite3.connect('data.db')
       cursor = conn.cursor()
       cursor.execute("Select * from Data Where email = :email", {'email': email})
 
@@ -313,7 +445,7 @@ def loginDetail():
    if request.method == "POST":
       email = request.form['email']
       password = request.form['password']
-      conn = sqlite3.connect('tutspotData.db')
+      conn = sqlite3.connect('data.db')
       cursor = conn.cursor()
       cursor.execute("Select * from Data Where email = :email", {'email': email})
       user = cursor.fetchone()
@@ -334,6 +466,7 @@ def loginDetail():
 @app.route('/paymentDetail', methods=["POST"])
 def payment():
    return render_template("payment.html")
+
 @app.route('/logout')
 def logout():
    for i in list(session.keys()):

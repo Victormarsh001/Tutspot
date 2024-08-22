@@ -41,9 +41,9 @@
     <!-- Post Form -->
     <div style="margin-top: 105px;" class="container">
         <h3>Create a Post</h3>
-        <form id="postForm">
+        <form action="/publisher" method="post" id="postForm">
             <div class="form-group lead">
-                <textarea style="border-radius: 8px; border: 2px solid blue; font-size: 14px;" id="postContent" class="form-control lead" rows="14" placeholder="Write your post here..." maxlength="1000"></textarea>
+                <textarea style="border-radius: 8px; border: 2px solid blue; font-size: 14px;" name="pub" id="postContent" class="form-control lead" rows="14" placeholder="Write your post here..." maxlength="1000"></textarea>
                 <small  style="color: white;" id="postError" class="form-text text-muted"></small>
             </div>
             <button style="width: 90%; margin-left: 5%;" type="submit" class="btn btn-primary mb-9">Publish</button>

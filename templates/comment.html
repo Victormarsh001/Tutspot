@@ -43,7 +43,9 @@
         <h3>Add a Comment</h3>
         <form action="/comment"  method="post" id="commentForm">
             <div class="form-group">
-                <textarea id="commentContent" class="form-control" rows="10" placeholder="Write your comment here..." maxlength="500"></textarea>
+                <textarea id="commentContent" class="form-control" rows="10" 
+                    name="comments"
+                    placeholder="Write your comment here..." maxlength="500"></textarea>
                 <small id="commentError" class="form-text text-muted"></small>
             </div>
             <button style="width: 90%; margin-left: 5%;" type="submit" class="btn btn-primary">Add Comment</button>

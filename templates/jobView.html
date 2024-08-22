@@ -106,20 +106,20 @@ h4{
 
     
     <div class="mt-7 container">
-        <h3 class="mb-3"> Community Discussion </h3>
+        <h3 class="mb-3"> Job Search </h3>
         <p style="font-size: 16px; color: gray;" class="lead"> Join the conversation! Ask questions, share ideas. Engage with others, get feedback, and learn from each other's experiences.</p>
-        {% for i in discussions[::-1] %}
+        {% for i in jobs[::-1] %}
         <div class="mt-1 course-card">
             <div style="margin-top: 10px; justify-content: space-between; display: flex; align-items: center; padding: 9px 10px;">
                 <h6> {{ i[1] }}</h6>
-                <i>{{ i[3] }}</i>
+                <i>{{ i[4] }}</i>
             </div>
             <div style="display: flex; align-items: center; padding: 5px 12px; margin-bottom: -12px;">
                 <p style="font-size: 15px; color: gray;"> {{ i[2] }}</p>
             </div>
             <div style="padding: 4px; margin-left: 4%;" class="mt-2">
                 
-<a href="/commentView?id={{ i[0] }}&author={{ i[1] }}" style="font-size: 19px; margin-left: 8%;"> See Comments</a>
+<a href="/job?id={{ i[0] }}" style="font-size: 18px; margin-left: 8%;"> Description</a>
                 
 
             </div>
@@ -134,7 +134,7 @@ h4{
     {% if 'username' not in session %}
     <a href="/login" class="btn btn-primary" style="background-color: #007BFF; border: 1px solid #007BFF; text-decoration: none; color: white; position: fixed; bottom: 20px; font-size: 19px; font-style: bold; right: 20px; padding: 9px 30px; border-radius: 8px;">   Login/Signup</a>
     {% else %}
-    <a href="/publisher" class="btn btn-primary bi bi-pencil" style="background-color: #007BFF; border: 1px solid #007BFF; text-decoration: none; color: white; position: fixed; bottom: 30px; font-size: 19px; font-style: bold; right: 20px; padding: 9px 30px; border-radius: 8px;">   Publish</a>
+    <a href="/publisher" class="btn btn-primary bi bi-pencil" style="background-color: #007BFF; border: 1px solid #007BFF; text-decoration: none; color: white; position: fixed; bottom: 30px; font-size: 19px; font-style: bold; right: 20px; padding: 9px 30px; border-radius: 8px;">   List a Job</a>
     {% endif %}
     <nav class="container foot">
     <h2 style="color: white; font-weight: bold; font-family: Roboto;">Tutspot</h2>
@@ -144,6 +144,7 @@ h4{
     <a href="/contact">Contact Us</a></br>
     <a href="/privacy">Privacy Policy</a></br>
     <a href="/terms">Terms of Service</a></br>
+    <a href="/jobView">Job Search</a></br>
     <a href="/discussion">Community Discussion </a></br>
 
     <h3 class="lead mt-4"> Our Mission </h3>

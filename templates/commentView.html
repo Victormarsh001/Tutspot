@@ -14,6 +14,7 @@
             text-align: center;
             
             
+            
             bottom: 0;
             left: 0;
             right: 0;
@@ -40,6 +41,7 @@ margin-bottom: 30px;
 
             padding-top: 52px;
         }
+    
         .navbar-brand {
             font-weight: bold;
         }
@@ -58,7 +60,6 @@ margin-bottom: 30px;
             color: gray;
             
             background-color: white;
-            transition: transform 0.1s;
         }
         .course-card h6{
             color: black;
@@ -67,7 +68,6 @@ margin-bottom: 30px;
         }
 
 .course-card:hover {
-    transform: scale(1.05);
     text-decoration: none;
 }
         .course-card i{
@@ -91,7 +91,7 @@ margin-bottom: 30px;
         
         
 h4{
-        color: blue;
+        color: black;
 }
         
         
@@ -105,55 +105,59 @@ h4{
     </nav>
 
     
-    <div class="mt-7 container">
-        <h3 class="mb-3"> Community Discussion </h3>
-        <p style="font-size: 16px; color: gray;" class="lead"> Join the conversation! Ask questions, share ideas. Engage with others, get feedback, and learn from each other's experiences.</p>
-        {% for i in discussions[::-1] %}
+    <div class="container mt-7">
+        <h4 class="mb-3"> {{ author }}'s Post</h4>
+        {% if not comments %}
+        <div>
+            <h2> No Comments Yet</h2>
+        </div>
+        {% else %}
+        {% for i in comments[::-1] %}
         <div class="mt-1 course-card">
             <div style="margin-top: 10px; justify-content: space-between; display: flex; align-items: center; padding: 9px 10px;">
                 <h6> {{ i[1] }}</h6>
                 <i>{{ i[3] }}</i>
             </div>
             <div style="display: flex; align-items: center; padding: 5px 12px; margin-bottom: -12px;">
-                <p style="font-size: 15px; color: gray;"> {{ i[2] }}</p>
+                <p> {{ i[2] }}</p>
             </div>
             <div style="padding: 4px; margin-left: 4%;" class="mt-2">
                 
-<a href="/commentView?id={{ i[0] }}&author={{ i[1] }}" style="font-size: 19px; margin-left: 8%;"> See Comments</a>
-                
+
 
             </div>
 
         </div>
         {% endfor %}
+        {% endif %}
         
-        
-        
-
     </div>
-    {% if 'username' not in session %}
-    <a href="/login" class="btn btn-primary" style="background-color: #007BFF; border: 1px solid #007BFF; text-decoration: none; color: white; position: fixed; bottom: 20px; font-size: 19px; font-style: bold; right: 20px; padding: 9px 30px; border-radius: 8px;">   Login/Signup</a>
-    {% else %}
-    <a href="/publisher" class="btn btn-primary bi bi-pencil" style="background-color: #007BFF; border: 1px solid #007BFF; text-decoration: none; color: white; position: fixed; bottom: 30px; font-size: 19px; font-style: bold; right: 20px; padding: 9px 30px; border-radius: 8px;">   Publish</a>
-    {% endif %}
-    <nav class="container foot">
-    <h2 style="color: white; font-weight: bold; font-family: Roboto;">Tutspot</h2>
-    <a href="/">Home</a></br>
-    <a href="/about">About</a></br>
-    <a href="/reviews">Review</a></br>
-    <a href="/contact">Contact Us</a></br>
-    <a href="/privacy">Privacy Policy</a></br>
-    <a href="/terms">Terms of Service</a></br>
-    <a href="/discussion">Community Discussion </a></br>
 
-    <h3 class="lead mt-4"> Our Mission </h3>
-    <p style="font-size: 15px;" class="lead">Our mission is to provide a tutorial spot for learners and professionals from the vast fields of learning and ensure the cycle of "Learn • Create • Earn".</p>
+    <a href="/comment" class="btn btn-primary bi bi-chat" style="background-color: #007BFF; border: 1px solid #007BFF; text-decoration: none; color: white; position: fixed; bottom: 30px; font-size: 19px; font-style: bold; right: 20px; padding: 9px 30px; border-radius: 6px;"> Add Comment</a>
+    <nav class="container foot">
+        <h2 style="color: white; font-weight: bold; font-family: Roboto;">Tutspot</h2>
+        <a href="/">Home</a></br>
+        <a href="/about">About</a></br>
+   
+        <a href="/reviews">Review</a></br>
+   
+        <a href="/contact">Contact Us</a></br>
+  
+        <a href="/privacy">Privacy Policy</a></br>
+    <a href="/terms">Terms of Service</a></br>
+  
+        <a href="/discussion">Community Discussion </a></br>
+
+  
+        <h3 class="lead mt-4"> Our Mission </h3>
+  
+        <p style="font-size: 15px;" class="lead">Our mission is to provide a tutorial spot for learners and professionals from the vast fields of learning and ensure the cycle of "Learn • Create • Earn".</p>
     
-    <p class="lead" style="font-size: 13px; color: white; text-align: center; padding: 9px;">Copyright © 2024 Tutspot. All rights reserved.Tutspot is a property of Victor Rodriguez.</p>
+   
+        <p class="lead" style="font-size: 13px; color: white; text-align: center; padding: 9px;">Copyright © 2024 Tutspot. All rights reserved.Tutspot is a property of Victor Rodriguez.</p>
     
     </nav>
-
     
 </body>
-
-</html>
+</html> 
+            

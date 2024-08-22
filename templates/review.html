@@ -3,105 +3,141 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tutspot</title>
+    
+    <title>Review Page</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <!-- Add your CSS link here -->
     <style>
-        input{
-            border: 1px solid blue;
-            border-radius: 8px;
-            padding: 9px 10px;
-        }
-        .foot{
-            background-color: black;
-            text-align: center;
-            
-            
-            bottom: 0;
-            left: 0;
-            right: 0;
-            color: white;
-            
-            margin-top: 25px;
-            padding-top: 20px;
-            margin-bottom: -25px;
-        }
-        .foot a{
-            color: white;
-            text-decoration: none;
-            font-weight: bold;
-            margin-left: 10px;
-            margin-top: 10px;
-        }
-        .foot a:hover{
-            color: #00ff00;
-        }
         body {
-            background-color: #f8f9fa;
-            padding-top: 52px;
-            margin-top: 52px;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin-top:95px;
         }
-        .navbar-brand {
-            font-weight: bold;
+
+        .navbar {
+            background-color: white;
+            padding: 1rem;
+            text-align: center;
+            box-shadow: 0px 4px 2px -2px gray;
         }
-        .course-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin-top: 19px;
+
+        .container {
+            margin: 2rem auto;
+            padding: 2rem;
+            max-width: 500px;
+            background-color: white;
         }
-        .course-card {
-            text-decoration: none;
-            border: 2px solid blue;
-            border-radius: 8px;
-            padding: 50px 20px;
-            color: gray;
+
+        h2 {
             
-            background-color: #f8f9fa;
-            transition: transform 0.3s;
+            margin-bottom: 1rem;
         }
-        .course-card:hover {
-            transform: scale(1.05);
-            text-decoration: none;
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        form small{
+            color: white;
+        }
+
+        
+
+        input[type="text"], textarea {
+            margin-bottom: 1rem;
+            padding: 0.5rem;
+            font-size: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        textarea {
+            resize: none;
+            height: 150px;
+        }
+
+        .error {
+            color: red;
+            font-size: 0.875rem;
+            display: none;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 0.75rem;
+            font-size: 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
         }
     </style>
 </head>
 <body>
     <nav style="background-color: white; box-shadow: 2px 2px 3px 2px rgba(200, 200, 200, 0.3);" class="navbar navbar-expand-lg navbar-light fixed-top">
-        <a class="navbar-brand" href="#"><img src="/static/logo.jpeg" width="65" height="60" alt="Logo"></a>
-        {% if active_user %}
-        <h4 style="color: blue;"> {{ active_user}}</h4>
-        <p style="color: blue; font-size: 14px;"class="mt-2 lead"> Online</p>
-        
-        
-        {% else %}
-        <a style="background-color: blue; border-radius: 8px; border: 1px solid blue; text-decoration: none; color: white; padding: 6px 11px;" class="lead" href="#"> Login / Signup</a>
-        {% endif %}
-        
-        
-    
+        <a class="navbar-brand" href="/"><img src="/static/logo.jpeg" width="65" height="60" alt="Logo"></a>
+                   
     </nav>
-    
-    <div class="lead container">
-        <h2> Tutspot Reviews </h2>
-        <p style="font-size: 16px; color: gray;" class="lead">Please tell the world about your experience with Tutspot. But do not include any confidential, sensitive or abusive words as in will render your review irrelevant.</p>
-        <a href="mailto:tutspotreviews@gmail.com?subject=Tutspot%20Review&body=%3CWrite%20your%20review%20here%3E" style="font-size: 16px; color: blue;" class="lead">Click here to write a review</a>
+
+    <div class="mt-8 container">
+        <h2>Tutspot Review</h2>
+        <form action="/reviews" method="post" id="reviewForm">
+            <input type="text" name="name" id="username" placeholder="Enter your username">
+            <small id="usernameError">Username cannot be empty.</small>
+            <textarea id="review"  name="review" placeholder="Write your review here..."></textarea>
+            <small id="reviewError">Review cannot be empty.</small>
+            <button type="submit">Submit Review</button>
+        </form>
     </div>
-    <nav class="container foot">
-    <h2 style="color: white; font-weight: bold; font-family: Roboto;">Tutspot</h2>
-    <a href='/'>Home</a>
-    <a href="/about">About</a>
-    <a href="/reviews">Review</a>
-    <a href="/contact">Contact Us</a>
-    <a href="/privacy">Privacy Policy</a>
-    <a href="/terms">Terms of Service</a>
+    <div style='background-color: white;' class="container">
+        <h3> Reviews </h3>
+        {% for i in data %}
+        <div style="border: 1px solid blue; padding: 13px; border-radius: 10px;" class="mt-1">
+        <div style="margin-top: 10px; justify-content: space-between; display: flex; align-items: center; padding: 9px 10px;">
+            <h6> {{ i[0] }}</h6>
+            <i>{{ i[2] }}</i>
+        </div>
+        <div style="display: flex; align-items: center; padding: 5px 12px; margin-bottom: -12px;">
+            <p> {{ i[1] }}</p>
+        </div>
+       </div>
+        {% endfor %}
+        
+    </div>
 
-    <h3 class="lead mt-4"> Our Mission </h3>
-    <p style="font-size: 15px;" class="lead">Our mission is to provide a tutorial spot for learners and professionals from the vast fields of learning and ensure the cycle of "Learn • Create • Earn".</p>
+
+
     
-    <p class="lead" style="font-size: 13px; color: white; text-align: center; padding: 9px;">Copyright © 2024 Tutspot. All rights reserved.</p><br/><p>Tutspot is a property of Marsh.</p>
-    
-    </nav>
-    
+
+    <script>
+        document.getElementById('reviewForm').addEventListener('submit', function (event) {
+            let valid = true;
+
+            const username = document.getElementById('username').value;
+            var small1 = document.getElementById('usernameError');
+            if (username.length < 1) {
+            small1.style.color = "red";
+                valid = false;
+            }
+
+            const review = document.getElementById('review').value;
+            var small3 = document.getElementById('reviewError');
+            if (review.length < 1) {
+    small3.style.color = "red";  
+            valid = false;
+            }
+            
+
+            if (!valid) {
+                event.preventDefault();
+            }
+        });
+    </script>
+
 </body>
-
 </html>
