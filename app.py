@@ -33,7 +33,8 @@ if not path.exists('post.db'):
 if not path.exists('jobs.db'):
    conn = sqlite3.connect('jobs.db')
    cursor = conn.cursor()
-   cursor.execute("Create Table Job(id Integer, name Text, role Text, description Text, date Text)")
+   cursor.execute("Create Table Job(email Text, name Text, role Text, description Text, date Text)")
+   cursor.execute("Insert Into Job Values('hack@gmail.com','Tesh','Flutter Developer','Build Flutter Apps','23/08/2024')")
    conn.commit()
    conn.close()
 if not path.exists('review.db'):
@@ -200,41 +201,48 @@ def jobView():
    cursor = conn.cursor()
    cursor.execute("Select * from Job")
    jobs = cursor.fetchall()
+   print(jobs)
    conn.close()
    return render_template('jobView.html', jobs=jobs)
    
 @app.route('/job')
 def job():
+   email = request.args.get('email')
+   role = request.args.get('role')
+   description = request.args.get('des')
+   date = request.args.get('date')
+   name = request.args.get('name')
    data = []
-   Id = request.args.get("id")
    
-   if Id:
-      session['jobId'] = Id
-   else:
+   if not email:
       return redirect(url_for("jobView"))
-   conn = sqlite3.connect('jobs.db')
-   cursor = conn.cursor()
-   cursor.execute("Select * From Job Where id = :id", {'id':session["jobId"]})
-   data = cursor.fetchall()
-   conn.close()
+   else:
+      data.append(email)
+      data.append(role)
+      data.append(description)
+      data.append(date)
+      data.append(name)
    return render_template("job.html", jobs=data)
 
 @app.route('/discussion')
 def discussion():
+   discussion = []
    conn = sqlite3.connect('post.db')
    cursor = conn.cursor()
    cursor.execute("Select * from Post")
-   discussions = cursor.fetchall()
+   discussion = cursor.fetchall()
    conn.close()
-   return render_template('discussion.html', discussions=discussions)
-
+      
+   return render_template('discussion.html', discussion=discussion)
+   
+   
 @app.route('/commentView')
 def commentView():
    Id = request.args.get("id")
    Author = request.args.get('author')
    if Id or Author:
-      session['discussionId'] = Id
-      session['discussionAuthor'] = Author
+      session['discussionId'] = deepcopy(Id)
+      session['discussionAuthor'] = deepcopy(Author)
    else:
       return redirect(url_for("discussion"))
       
@@ -278,6 +286,7 @@ def comment():
 
 @app.route('/publisher', methods=["GET", "POST"])
 def publisher():
+   size = 0
    if request.method == "POST":
       time = datetime.now()
       name = session["username"]
@@ -286,12 +295,11 @@ def publisher():
       conn = sqlite3.connect('post.db')
       cursor = conn.cursor()
       cursor.execute("Select * from Post")
-      size = len(cursor.fetchall()) + 1
+      size += len(cursor.fetchall()) + 1
       cursor.execute("INSERT INTO Post(id, name, post, date) VALUES (:id, :name, :post, :date)", {'id':size, 'name':name, 'post':pub, 'date':date})
       conn.commit()
       conn.close()
-      print("Added to Post table")
-      return render_template('discussion.html')
+      return redirect(url_for('discussion'))
    
 
    return render_template('publisher.html')

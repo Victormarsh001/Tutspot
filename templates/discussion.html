@@ -108,11 +108,14 @@ h4{
     <div class="mt-7 container">
         <h3 class="mb-3"> Community Discussion </h3>
         <p style="font-size: 16px; color: gray;" class="lead"> Join the conversation! Ask questions, share ideas. Engage with others, get feedback, and learn from each other's experiences.</p>
-        {% for i in discussions[::-1] %}
+        {% if not discussion %}
+        <h2 style="padding: 15px 20px; text-align: center;">Start a Discussion </h2>
+        {% else %}
+        {% for i in discussion[::-1] %}
         <div class="mt-1 course-card">
             <div style="margin-top: 10px; justify-content: space-between; display: flex; align-items: center; padding: 9px 10px;">
                 <h6> {{ i[1] }}</h6>
-                <i>{{ i[3] }}</i>
+                <i>{{ i[0],  i[3] }}</i>
             </div>
             <div style="display: flex; align-items: center; padding: 5px 12px; margin-bottom: -12px;">
                 <p style="font-size: 15px; color: gray;"> {{ i[2] }}</p>
@@ -126,6 +129,7 @@ h4{
 
         </div>
         {% endfor %}
+        {% endif %}
         
         
         

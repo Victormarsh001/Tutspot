@@ -107,25 +107,29 @@ h4{
     
     <div class="mt-7 container">
         <h3 class="mb-3"> Job Search </h3>
-        <p style="font-size: 16px; color: gray;" class="lead"> Join the conversation! Ask questions, share ideas. Engage with others, get feedback, and learn from each other's experiences.</p>
+        <p style="font-size: 14px; color: gray;" class="lead"> Join the conversation! Ask questions, share ideas. Engage with others, get feedback, and learn from each other's experiences. Please note that Tutspot has nothing to do with the job or any of the details provided by the job applicants.</p>
+        {% if not jobs %}
+        <h2 style="text-align: center; padding: 15px 20px;"> No Job Available </h2>
+        {% else %}
         {% for i in jobs[::-1] %}
-        <div class="mt-1 course-card">
-            <div style="margin-top: 10px; justify-content: space-between; display: flex; align-items: center; padding: 9px 10px;">
-                <h6> {{ i[1] }}</h6>
+        <div class="mt-2 course-card">
+            <div style="margin-top: 10px; justify-content: space-between; display: flex; align-items: center; padding: 5px 7px;">
+                <h6> Listed by {{ i[1] }}</h6>
                 <i>{{ i[4] }}</i>
             </div>
-            <div style="display: flex; align-items: center; padding: 5px 12px; margin-bottom: -12px;">
-                <p style="font-size: 15px; color: gray;"> {{ i[2] }}</p>
+            <div style="display: flex; align-items: center; padding: 3px 10px; margin-bottom: -12px;">
+                <p style="font-size: 16px; color: black;"> {{ i[2] }}</p>
             </div>
             <div style="padding: 4px; margin-left: 4%;" class="mt-2">
                 
-<a href="/job?id={{ i[0] }}" style="font-size: 18px; margin-left: 8%;"> Description</a>
+<a href="/job?email={{ i[0] }}&role={{ i[2] }}&des={{ i[3] }}&date={{ i[4] }}&name={{ i[1] }}" style="font-size: 18px; margin-left: 8%;"> See Descriptions</a>
                 
 
             </div>
 
         </div>
         {% endfor %}
+        {% endif %}
         
         
         
@@ -134,7 +138,7 @@ h4{
     {% if 'username' not in session %}
     <a href="/login" class="btn btn-primary" style="background-color: #007BFF; border: 1px solid #007BFF; text-decoration: none; color: white; position: fixed; bottom: 20px; font-size: 19px; font-style: bold; right: 20px; padding: 9px 30px; border-radius: 8px;">   Login/Signup</a>
     {% else %}
-    <a href="/publisher" class="btn btn-primary bi bi-pencil" style="background-color: #007BFF; border: 1px solid #007BFF; text-decoration: none; color: white; position: fixed; bottom: 30px; font-size: 19px; font-style: bold; right: 20px; padding: 9px 30px; border-radius: 8px;">   List a Job</a>
+    <a href="/jobList" class="btn btn-primary bi bi-pencil" style="background-color: #007BFF; border: 1px solid #007BFF; text-decoration: none; color: white; position: fixed; bottom: 30px; font-size: 19px; font-style: bold; right: 20px; padding: 9px 30px; border-radius: 8px;">   List a Job</a>
     {% endif %}
     <nav class="container foot">
     <h2 style="color: white; font-weight: bold; font-family: Roboto;">Tutspot</h2>

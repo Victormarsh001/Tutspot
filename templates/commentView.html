@@ -106,10 +106,10 @@ h4{
 
     
     <div class="container mt-7">
-        <h4 class="mb-3"> {{ author }}'s Post</h4>
+        <h4 class="mb-3"> {{ session["discussionAuthor"] }}'s Post</h4>
         {% if not comments %}
         <div>
-            <h2> No Comments Yet</h2>
+            <h2 style="text-align: center; padding: 15px 20px;"> No Comments Yet</h2>
         </div>
         {% else %}
         {% for i in comments[::-1] %}
@@ -132,8 +132,11 @@ h4{
         {% endif %}
         
     </div>
-
+    {% if not 'username' in session %}
+    <a href="/login" class="btn btn-primary bi bi-chat" style="background-color: #007BFF; border: 1px solid #007BFF; text-decoration: none; color: white; position: fixed; bottom: 30px; font-size: 19px; font-style: bold; right: 20px; padding: 9px 30px; border-radius: 6px;"> Login/Signup</a>
+    {% else %}
     <a href="/comment" class="btn btn-primary bi bi-chat" style="background-color: #007BFF; border: 1px solid #007BFF; text-decoration: none; color: white; position: fixed; bottom: 30px; font-size: 19px; font-style: bold; right: 20px; padding: 9px 30px; border-radius: 6px;"> Add Comment</a>
+    {% endif %}
     <nav class="container foot">
         <h2 style="color: white; font-weight: bold; font-family: Roboto;">Tutspot</h2>
         <a href="/">Home</a></br>
@@ -145,6 +148,7 @@ h4{
   
         <a href="/privacy">Privacy Policy</a></br>
     <a href="/terms">Terms of Service</a></br>
+    <a href="/jobView"> Job Search</a></br>
   
         <a href="/discussion">Community Discussion </a></br>
 
