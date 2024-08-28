@@ -204,25 +204,40 @@ def jobView():
    print(jobs)
    conn.close()
    return render_template('jobView.html', jobs=jobs)
+
+@app.route('/listJob', methods=["GET", "POST"])
+def listJob():
+   if request.method == "POST":
+      time = datetime.now()
+      name = session['username']
+      email = request.form['email']
+      des = request.form['description']
+      role = request.form['role']
+      date = time.strftime("%d/%m/%Y")
+      conn = sqlite3.connect('jobs.db')
+      cursor = conn.cursor()
+      cursor.execute("Insert Into Job(email, name, role, description, date) VALUES(:email, :name, :role, :description, :date)", {'email':email, 'name':name, 'role':role, 'description':des, 'date':date})
+      conn.commit()
+      conn.close()
+      return redirect(url_for('jobView'))
+   
+   return render_template('listJobs.html')
    
 @app.route('/job')
 def job():
-   email = request.args.get('email')
    role = request.args.get('role')
-   description = request.args.get('des')
-   date = request.args.get('date')
-   name = request.args.get('name')
+   email = request.args.get('email')
    data = []
    
-   if not email:
+   if not role or not email:
       return redirect(url_for("jobView"))
    else:
-      data.append(email)
-      data.append(role)
-      data.append(description)
-      data.append(date)
-      data.append(name)
-   return render_template("job.html", jobs=data)
+      conn = sqlite3.connect('jobs.db')
+      cursor = conn.cursor()
+      cursor.execute("Select * From Job Where role = :role and email = :email", {'role':role, 'email':email})
+      data = cursor.fetchall()
+      conn.close()
+   return render_template("job.html", data=data)
 
 @app.route('/discussion')
 def discussion():

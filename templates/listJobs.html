@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Job Page</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <!-- Add your CSS link here -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin-top:95px;
+        }
+
+        .navbar {
+            background-color: white;
+            padding: 1rem;
+            text-align: center;
+            box-shadow: 0px 4px 2px -2px gray;
+        }
+
+        .container {
+            margin: 2rem auto;
+            padding: 2rem;
+            max-width: 500px;
+            background-color: white;
+        }
+
+        h2 {
+            
+            margin-bottom: 1rem;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        form small{
+            color: white;
+        }
+
+        
+
+        input, textarea {
+            margin-bottom: 1rem;
+            padding: 0.5rem;
+            font-size: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        textarea {
+            resize: none;
+            height: 150px;
+        }
+
+        .error {
+            color: red;
+            font-size: 0.875rem;
+            display: none;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 0.75rem;
+            font-size: 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <nav style="background-color: white; box-shadow: 2px 2px 3px 2px rgba(200, 200, 200, 0.3);" class="navbar navbar-expand-lg navbar-light fixed-top">
+        <a class="navbar-brand" href="/"><img src="/static/logo.jpeg" width="65" height="60" alt="Logo"></a>
+                   
+    </nav>
+
+    <div class="mt-8 container">
+        <h2>List a Job</h2>
+        <form action="/listJob" method="post" id="reviewForm">
+            <input type="email" name="email" id="email" placeholder="Email Address">
+            
+            <input type="text" name="role" id="role" placeholder="Set Job Role">
+            <small id="roleError">Job role cannot be empty.</small>
+            
+            <textarea id="description"  name="description" placeholder="Write your job description here..."></textarea>
+            <small id="desError">Description cannot be empty.</small>
+            <button type="submit">List Job</button>
+        </form>
+    </div>
+
+
+    
+
+    <script>
+        document.getElementById('reviewForm').addEventListener('submit', function (event) {
+            let valid = true;
+
+            const role = document.getElementById('role').value;
+            var small1 = document.getElementById('roleError');
+            if (role.length < 1) {
+            small1.style.color = "red";
+                valid = false;
+            }
+
+            const description = document.getElementById('description').value;
+            var small3 = document.getElementById('desError');
+            if (description.length < 1) {
+    small3.style.color = "red";  
+            valid = false;
+            }
+            
+
+            if (!valid) {
+                event.preventDefault();
+            }
+        });
+    </script>
+
+</body>
+</html>
