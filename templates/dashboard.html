@@ -20,7 +20,7 @@
         align-items: center;
       }
       .p{
-        font-size: 16px;
+        font-size: 15px;
       }
     </style>
   </head>
@@ -29,11 +29,11 @@
         <a class="navbar-brand" href="#"><img src="/static/logo.jpeg" width="65" height="60" alt="Logo"></a>
     </nav>
     
-    <div class="container">
+    <div class="container mt-2">
       <h3>Profile</h3>
-      <p class="p lead"> Username: {{ session["username"] }}</p>
-      <p class="p lead">Country: {{ session["country"] }}</p>
-      <p class="p lead">Email Address: {{ session["email"] }}</p>
+      <h6> Username:<i class="p lead"> {{ session["username"] }} </i></h6>
+      <h6>Country: <i class="p lead">{{ session["country"] }}</i></h6>
+      <h6>Email Address: <i class="p lead">{{ session["email"] }}</i></h6>
     </div>
     <div class="mt-9 container">
       <h3>Courses</h3>
@@ -49,10 +49,24 @@
         <a style="font-size: 13px; text-decoration: none; font-weight: bold; border: 2px solid blue; background-color: blue; padding: 6px 10px; color: white; border-radius: 8px;" href="#">$20</a>
       </div>
       {% endif %}
-
+    </br>
     <div class="mt-9 container">
-      <h3> Transactions </h3>
-      <p class="lead">Transactions here</p>
+      <h3> Jobs </h3>
+      
+      {% if not jobs %}
+      <p class="lead">No job listed</p>
+      {% else %}
+      {% for i in jobs %}
+      <div style="border: 2px solid blue; border-radius: 8px; padding: 15px 15px; box-shadow: 4px 4px 5px 4px rgba(200, 200, 200, 0.3);" class="contain lead">
+        <h6 style="margin-right: 15px;" class="lead">{{ i[2] }} </h6>
+        <div style="justify-content: space-between; margin-left: 12px;">
+          <a style="font-size: 13px; text-decoration: none; font-weight: bold; border: 2px solid blue; background-color: #faf9f6; padding: 6px 10px; color: blue; border-radius: 8px;" href="/editJob?role={{ i[2] }}">Edit</a>
+          <a style="font-size: 13px; text-decoration: none; font-weight: bold; border: 2px solid red; background-color: #faf9f6; padding: 6px 10px; color: red; border-radius: 8px;" href="/deleteJob?role={{ i[2] }}">Delete</a>
+        </div>
+      </div>
+      {% endfor %}
+      {% endif %}
+      
     </div>
   </body>
 </html>

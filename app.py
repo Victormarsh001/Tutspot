@@ -4,9 +4,13 @@ from os import environ, path
 from secrets import token_urlsafe
 from datetime import datetime
 from flask import Flask, render_template, request, redirect, url_for, session
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
 
 app = Flask(__name__)
 app.secret_key = environ.get("SECRET_KEY")
+
 if not app.secret_key:
     app.secret_key = token_urlsafe(32)
 
@@ -204,13 +208,67 @@ def jobView():
    print(jobs)
    conn.close()
    return render_template('jobView.html', jobs=jobs)
+@app.route('/deleteJob')
+def deleteJob():
+   value = session["email"]
+   conn1 = sqlite3.connect('jobs.db')
+   cursor1 = conn1.cursor()
+   cursor1.execute("Select * From Job Where email = :value", {'value':value})
+   jobs = cursor1.fetchall()
+   conn1.close()
+   
+   conn = sqlite3.connect('data.db')
+   cursor = conn.cursor()
+   cursor.execute("Select * from Android Where email = :value", {'value':value})
+   result = cursor.fetchone()
+   conn.commit()
+   conn.close()
+   if result:
+      session["android"] = value
+   else:
+      session["android"] = False
+
+   
+   role = request.args.get('role')
+   if not role:
+      return redirect(url_for('dashboard'))
+   else:
+      conn = sqlite3.connect("jobs.db")
+      cursor = conn.cursor()
+      cursor.execute("Delete From Job Where role = :role", {"role":role})
+   return render_template('dashboard.html', jobs=jobs, android=session["android"])
+   
+@app.route('/editJob', methods=["Get","POST"])
+def editJob():
+   rol = request.args.get('role')
+   if not rol:
+      return redirect(url_for('dashboard'))
+      
+   email = session["email"]
+   conn = sqlite3.connect('jobs.db')
+   cursor = conn.cursor()
+   cursor.execute("Select role, description From Job Where role = :role and email = :email", {'role':rol, 'email': email})
+   job = cursor.fetchone()
+   conn.close()
+   if request.method == "POST":
+      role = request.form['role']
+      description = request.form["description"]
+      conn1 = sqlite3.connect('jobs.db')
+      cursor1 = conn1.cursor()
+      cursor1.execute("Update Job SET role = :role, description = :description Where role = :rol and email = :email", {'role':role, 'description':description, 'rol':rol, 'email':email})
+      conn1.commit()
+      conn1.close()
+      return redirect(url_for('dashboard'))
+
+   
+   return render_template("editJob.html", job=job)
 
 @app.route('/listJob', methods=["GET", "POST"])
 def listJob():
    if request.method == "POST":
       time = datetime.now()
       name = session['username']
-      email = request.form['email']
+      email = session["email"]
       des = request.form['description']
       role = request.form['role']
       date = time.strftime("%d/%m/%Y")
@@ -367,13 +425,16 @@ def introPage():
    if name not in intro.keys():
       return "This Course is not Available", 404
    return render_template('intro.html',name=name, intros=intro)
-
-
-
-   
+ 
 @app.route('/dashboard')
 def dashboard():
    value = session["email"]
+   conn1 = sqlite3.connect('jobs.db')
+   cursor1 = conn1.cursor()
+   cursor1.execute("Select * From Job Where email = :value", {'value':value})
+   jobs = cursor1.fetchall()
+   conn1.close()
+   
    conn = sqlite3.connect('data.db')
    cursor = conn.cursor()
    cursor.execute("Select * from Android Where email = :value", {'value':value})
@@ -384,7 +445,7 @@ def dashboard():
    else:
       session["android"] = False
 
-   return render_template('dashboard.html', android=session["android"])
+   return render_template('dashboard.html', android=session["android"], jobs=jobs)
       
 
 @app.route('/about')
@@ -457,6 +518,25 @@ def signupDetail():
          cursor.execute("Insert into Data(name, country, email, password) Values(:name, :country, :email, :password)", {'name':name, 'country':country, 'email':email, 'password':password})
          conn.commit()
          conn.close()
+         sender_email = "officialtutspot@gmail.com"
+         sender_password = "nuhu gkud kyud fgae"
+         recipient_email = email
+         body = f"Hello {name}, welcome to Tuspot. Do not reply this email, keep this email private. \nYour Tutspot password is {password}"
+         subject = 'Welcome to Tutspot'
+         message = MIMEMultipart()
+         message["From"] = "Tutspot.net"
+         message["To"] = recipient_email
+         message["Subject"] = subject
+         message.attach(MIMEText(body, "plain"))
+         try:
+            server = smtplib.SMTP_SSL("smtp.gmail.com", 465)
+            server.login(sender_email, sender_password)
+            server.sendmail(sender_email, recipient_email, message.as_string())
+            server.quit()
+            print("Email sent successfully!")
+         except Exception as e:
+            print(f"Failed to send email: {e}")
+         
          return redirect(url_for('index'))
    else:
       return render_template('signup.html')
