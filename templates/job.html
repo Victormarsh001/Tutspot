@@ -110,7 +110,7 @@ margin-bottom: 30px;
         {% if not 'username' in session %}
         <a href="/login" class="btn btn-primary">Login to Apply</a>
         {% else %}
-        <a href="" class="btn btn-primary">Apply</a>
+        <a href="mailto:{{ i[0] }}?subject=Job%20Application({{ i[2] }})&body=%3CProvide%20your%20Full%20Name%2C%20Country%3E%0D%0A%3CQualifications%2C%20Years%20of%20Experience%3E%0D%0A%3CContact%3E" class="btn btn-primary">Apply</a>
         {% endif %}
         {% endfor %}
 

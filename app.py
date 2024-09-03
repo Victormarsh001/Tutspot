@@ -50,12 +50,15 @@ if not path.exists('review.db'):
    conn.close()
    
 
+global python
+global frontend
+
 intro = {'Frontend Web Development': [ ['Introduction to HTML', 'HTML Basic Structure', 'HTML Headings', 'HTML Paragraphs', 'HTML Links', 'Images/Videos in HTML', 'HTML Lists', 'HTML Tables','HTML Forms','HTML Containers','Recap','Practice'], 
                               ['HTML Code Editor','You must signup or login to access this free course', 'Any prior knowledge on programming will be an advantage']
 ],
 'Python Programming Language':[['Introduction to Machine Learning', 'Linear Regression', 'Logistic Regression', 'Decision Trees', 'Random Forest', 'Neural Networks', 'K-Nearest Neighbors', 'Support Vector Machines', 'Clustering', 'Dimensionality Reduction', 'ML Practice'], 
                               ['Python IDE or Code Editor','You have to login and make payments to access this course', 'Any prior knowledge on other Programming Language is an advantage']
-], 'SQL Database': [[ 'Introduction to SQL', 'SQL Basics', 'SQL Queries', 'SQL Joins', 'SQL Aggregates', 'SQL Functions', 'SQL Practice'], ['Python IDE or Code Editor', 'You must login and pay a token to access this course', 'Any prior knowledge on Python Programming Language will be relevant']], 'Backend Development': [[ 'Introduction to Data Science', 'Data Visualization', 'Data Analysis', 'Data Preprocessing', 'Data Cleaning', 'Data Modeling', 'Data Wrangling'], ['Python IDE or Code Editor', 'You must login and pay a token to access this course', 'Any prior knowledge on SQL Database and Python Programming Language will be relevant']],
+], 'SQL Database': [[ 'Introduction to SQL', 'SQL Basics', 'SQL Query', 'Python + SQL', 'Sqlite','Create','Read','Update','Delete','Dynamic Querying', 'SQL Summary', 'SQL Practice'], ['Python IDE or Code Editor','This course is for beginners and experts', 'Any prior knowledge on Python Programming Language will be relevant']], 'Backend Development': [[ 'Introduction to Data Science', 'Data Visualization', 'Data Analysis', 'Data Preprocessing', 'Data Cleaning', 'Data Modeling', 'Data Wrangling'], ['Python IDE or Code Editor', 'You must login and pay a token to access this course', 'Any prior knowledge on SQL Database and Python Programming Language will be relevant']],
 'Swift':[[ 'Introduction to Swift', 'Swift Basics', 'Swift Control Flow', 'Swift Collections', 'Swift Functions', 'Swift Practice'], ['Swift IDE or Code Editor', 'You have to  login and make payment to access this course', 'Prior knowledge of any Object-Oriented Programming Language will be an advantage']], 'Dart':[[ 'Introduction to Dart', 'Dart Basics', 'Dart Control Flow', 'Dart Collections', 'Dart Functions', 'Dart Practice'],[ 'Dart IDE or Code Editor', 'You have to login and make payment to access this course', 'Prior knowledge of any Object-Oriented Programming Language will be an advantage']], 'UI/UX Design Principles':[[ 'Introduction to UI/UX Design', 'UI/UX Design Principles', 'UI/UX Design Tools', 'UI/UX Design Practice'], ['UI/UX Design IDE or Code Editor', 'You have to login and make payment to access this course', 'Prior knowledge of any Object-Oriented Programming Language will be an advantage']], 'Kotlin':[[ 'Introduction to Kotlin', 'Kotlin Basics', 'Kotlin Control Flow', 'Kotlin Collections', 'Kotlin Functions', 'Kotlin Practice'],[ 'Kotlin IDE or Code Editor', 'You have to login and make payment to access this course', 'Prior knowledge of any Object-Oriented Programming Language will be an advantage']], 'Java':[[ 'Introduction to Java', 'Java Basics', 'Java Control Flow', 'Java Collections', 'Java Functions', 'Java Practice'], [ 'Java IDE or Code Editor', 'You have to login and make payment to access this course', 'Prior knowledge of any Object-Oriented Programming Language will be an advantage']], 'Mongo Database':[['Introduction to MongoDB', 'MongoDB Basics', 'MongoDB Queries', 'MongoDB Aggregates'],[ 'MongoDB IDE or Code Editor', 'You have to login and make payment to access this course', 'Prior knowledge of any Object-Oriented Programming Language will be an advantage']], 'Digital Marketing':[[ 'Introduction to Digital Marketing', 'Digital Marketing Basics', 'Digital Marketing Tools', 'Digital Marketing Practice'],[ 'Digital Marketing IDE or Code Editor', 'You have to login and make payment to access this course', 'Prior knowledge of any Object-Oriented Programming Language will be an advantage']]
 }
 python = [
@@ -379,18 +382,26 @@ def publisher():
 
 @app.route('/course', methods=["GET", "POST"])
 def course():
+   global python
+   global frontend
    
+   content = []
+   if "current_course" not in session:
+      return redirect(url_for('index'))
+   if session["current_course"] == "Python Programming Language":
+      content = python
+   elif session["current_course"] == "Frontend Web Development":
+      content = frontend
    
    if "pos" not in session:
       session["pos"] = -1
 
-   if request.method == "POST":
-      if session["pos"] < len(session["content"])-1:
-         session["pos"] += 1
-      else:
-         session["pos"] = 0
-      
-   return render_template('course.html',course=session["current_course"], content=session["content"], length=len(session["content"]), progress=session["pos"]+1)
+   if request.method == "POST" and session["pos"] < len(content)-1:
+      session["pos"] += 1
+   elif request.method == "POST" and session["pos"] == len(content)-1:
+      session["pos"] = 0
+     
+   return render_template('course.html',course=session["current_course"], content=content, progress=session["pos"]+1, length=len(content))
 
 @app.route('/courseRev', methods=["GET", "POST"])
 def courseRev():
@@ -521,7 +532,7 @@ def signupDetail():
          sender_email = "officialtutspot@gmail.com"
          sender_password = "nuhu gkud kyud fgae"
          recipient_email = email
-         body = f"Hello {name}, welcome to Tuspot. Do not reply this email, keep this email private. \nYour Tutspot password is {password}"
+         body = f"Hello {name}, welcome to Tuspot. \nDo not reply this email, keep it private. \nYour Tutspot password is {password}"
          subject = 'Welcome to Tutspot'
          message = MIMEMultipart()
          message["From"] = "Tutspot.net"
@@ -540,8 +551,6 @@ def signupDetail():
          return redirect(url_for('index'))
    else:
       return render_template('signup.html')
-
-
 
 @app.route('/loginDetail', methods=["GET", "POST"])
 def loginDetail():
